@@ -4,7 +4,7 @@ import { Component, OnInit } from '@angular/core';
   selector: 'app-invoices',
   template: `
     <p>
-      invoices works!
+      <app-side-nav></app-side-nav>
     </p>
   `,
   styles: [
