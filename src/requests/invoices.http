@@ -1,0 +1,3 @@
+### Get all Invoices
+GET /api/v1/invoices HTTP/1.1
+Host: localhost:3000
