@@ -4,7 +4,7 @@ import { AppComponent } from './app.component';
 
 const routes: Routes = [
    {path: '', component: AppComponent, pathMatch: 'full'},
-   {path: 'invoices', loadChildren: () => import('../app/invoice-builder/invoice-builder.module').then(m => m.InvoiceBuilderModule)},
+   {path: 'invoices', loadChildren: () => import('./dashboard/dashboard.module').then(m => m.DashboardModule)},
    {path: '**', redirectTo: 'invoices', pathMatch: 'full'},
 ];
 
