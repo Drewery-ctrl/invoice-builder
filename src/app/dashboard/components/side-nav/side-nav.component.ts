@@ -12,15 +12,15 @@ export class SideNavComponent implements OnInit {
 
    links = [{
       name: 'Invoices',
-      url: '/invoices',
+      url: 'invoices',
       icon: 'dashboard'
    }, {
       name: 'Clients',
-      url: '/clients',
+      url: 'clients',
       icon: 'people'
    }, {
       name: 'Settings',
-      url: '/settings',
+      url: 'settings',
       icon: 'settings'
    }];
 
