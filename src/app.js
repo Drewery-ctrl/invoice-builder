@@ -1,8 +1,19 @@
 import express from 'express';
+import mongoose from 'mongoose';
 import { router } from './config/routes';
 
 const app = express();
 const PORT = process.env.PORT || 3000;
+
+mongoose.Promise = global.Promise;
+mongoose.connect('mongodb://localhost/invoice-builder').then(
+  () => {
+    console.log('Connected to MongoDB');
+  },
+  (err) => {
+    console.log(`Error connecting to MongoDB: ${err}`);
+  }
+);
 
 app.use('/api/v1', router);
 app.get('/', (req, res) => {
