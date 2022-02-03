@@ -9,11 +9,8 @@
    </mat-sidenav>
 
    <div class="app-sidenav-content">
-      <app-tool-bar></app-tool-bar>
+      <app-tool-bar (toggleSideNav)="sidenav.toggle()"></app-tool-bar>
       <router-outlet></router-outlet> <!--renders child routes (main-content-components)-->
-      <button type="button" mat-button (click)="sidenav.toggle()">
-         Open Side Nav
-      </button>
    </div>
 </mat-sidenav-container>
 
