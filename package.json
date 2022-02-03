@@ -1,10 +1,22 @@
 {
-  "name": "server",
+  "name": "invoice-builder",
   "version": "1.0.0",
   "main": "index.js",
+  "description": "backend server for invoice-builder client application",
+  "author": {
+    "name": "Drewery",
+    "email": "drewery@gmail.com",
+    "url": ""
+  },
+  "scripts": {
+    "start": "nodemon src/app.js --exec babel-node --presets env",
+    "build": "babel src -d dist --source-maps",
+    "serve": "node dist/app.js"
+  },
   "license": "MIT",
   "dependencies": {
-    "express": "^4.17.2"
+    "express": "^4.17.2",
+    "nodemon": "^2.0.15"
   },
   "devDependencies": {
     "babel-cli": "^6.26.0",
