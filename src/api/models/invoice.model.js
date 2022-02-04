@@ -7,8 +7,8 @@ const invoiceSchema = new Schema({
   quantity: { type: Number, required: true },
   amount: { type: Number, required: true },
   tax: { type: Number, required: true },
-  date: { type: Date, default: Date.now },
-  dueDate: { type: Date, default: Date.now }
+  date: { type: Date, default: Date.now, required: true },
+  dueDate: { type: Date, required: true },
 }, { timestamps: true });
 
 export default mongoose.model('Invoice', invoiceSchema);

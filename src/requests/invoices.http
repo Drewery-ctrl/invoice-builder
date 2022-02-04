@@ -1,3 +1,17 @@
 ### Get all Invoices
 GET /api/v1/invoices HTTP/1.1
 Host: localhost:3000
+
+### Create new Invoice
+POST /api/v1/invoices HTTP/1.1
+Host: localhost:3000
+Content-Type: application/json
+
+{
+  "item": "Freelance Project Budget",
+  "amount": "100.00",
+  "quantity": "1",
+  "tax": "0.00",
+  "date": "2019-01-01",
+  "dueDate": "2019-01-01"
+}
