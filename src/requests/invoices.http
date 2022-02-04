@@ -1,10 +1,10 @@
 ### Get all Invoices
 GET /api/v1/invoices HTTP/1.1
-Host: localhost:3000
+Host: localhost:3001
 
 ### Create new Invoice
 POST /api/v1/invoices HTTP/1.1
-Host: localhost:3000
+Host: localhost:3001
 Content-Type: application/json
 
 {
