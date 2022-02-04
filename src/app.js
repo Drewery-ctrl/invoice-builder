@@ -1,14 +1,18 @@
 import express from 'express';
 import mongoose from 'mongoose';
 import logger from 'morgan';
+import swaggerUI from 'swagger-ui-express';
+import swaggerDocument from './config/swagger.json';
 import { router } from './config/routes';
 
 const app = express();
+const PORT = process.env.PORT || 3001;
+
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(logger('dev'));
+app.use('/api-docs', swaggerUI.serve, swaggerUI.setup(swaggerDocument, { explorer: true }));
 app.use('/api/v1', router);
-const PORT = process.env.PORT || 3001;
 
 mongoose.Promise = global.Promise;
 mongoose.connect('mongodb://localhost/invoice-builder').then(
