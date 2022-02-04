@@ -13,6 +13,7 @@ const routes: Routes = [
          {path: '', component: MainContentComponent},
          {path: 'invoices', component: InvoiceListingComponent},
          {path: 'clients', component: ClientListingComponent},
+         {path: '**', redirectTo: 'invoices'}
       ]
    }
 ];
