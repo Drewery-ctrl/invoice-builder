@@ -10,6 +10,8 @@ import {MatTableModule} from "@angular/material/table";
 import {MatMenuModule} from "@angular/material/menu";
 import {MatFormFieldModule} from "@angular/material/form-field";
 import {MatInputModule} from "@angular/material/input";
+import {MatDatepickerModule} from "@angular/material/datepicker";
+import {MatNativeDateModule} from "@angular/material/core";
 
 const exportedMaterialModules = [
    MatButtonModule,
@@ -22,6 +24,8 @@ const exportedMaterialModules = [
    MatMenuModule,
    MatFormFieldModule,
    MatInputModule,
+   MatDatepickerModule,
+   MatNativeDateModule
 ];
 
 @NgModule({
