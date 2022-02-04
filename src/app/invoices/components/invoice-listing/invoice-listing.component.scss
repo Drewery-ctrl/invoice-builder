@@ -1,5 +1,17 @@
 .demo-table {
-   width: 70%;
+   width: 80%;
+}
+
+.invoice-container {
+   display: flex;
+   flex-direction: column;
+   max-height: 500px;
+   min-height: 300px;
+}
+
+.mat-table {
+   overflow: auto;
+   max-height: 500px;
 }
 
 .mat-column-demo-position {
@@ -22,4 +34,21 @@
    width: 32px;
    text-align: center;
    font-weight: bold;
+}
+
+
+.flex-spacer {
+   flex: 1 1 auto;
+}
+
+
+.menu-bar {
+   width: 80%;
+   display: flex;
+   justify-content: space-between;
+}
+
+.action-button {
+   color: rgb(225, 255, 255);
+   background-color: #ff4081;
 }

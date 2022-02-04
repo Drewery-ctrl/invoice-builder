@@ -8,7 +8,7 @@ import {Invoice} from "../../models/invoice";
    styleUrls: ['./invoice-listing.component.scss']
 })
 export class InvoiceListingComponent implements OnInit {
-   displayedColumns: string[] = ['ITEM', 'AMOUNT', 'QUANTITY', 'TAX', 'DATE', 'DUE DATE'];
+   displayedColumns: string[] = ['ITEM', 'AMOUNT', 'QUANTITY', 'TAX', 'DATE', 'DUE DATE', 'ACTIONS'];
    dataSource: Invoice[] = [];
 
    constructor(private invoiceService: InvoiceService) {
@@ -19,5 +19,9 @@ export class InvoiceListingComponent implements OnInit {
          this.dataSource = invoices;
          // console.log(invoices);
       });
+   }
+
+   addInvoice() {
+      this.invoiceService.addInvoice();
    }
 }
