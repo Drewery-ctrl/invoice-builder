@@ -4,7 +4,7 @@ import * as invoicesController from '../api/controllers/invoices.controller';
 export const router = express.Router();
 
 router.get('/invoices', invoicesController.findAllInvoices);
-// router.get('/invoices/:id', invoicesController.findOneInvoice);
+router.get('/invoices/:id', invoicesController.findInvoiceById);
 router.post('/invoices', invoicesController.createInvoice);
-// router.put('/invoices/:id', invoicesController.updateInvoice);
-// router.delete('/invoices/:id', invoicesController.deleteInvoice);
+router.put('/invoices/:id', invoicesController.updateInvoice);
+router.delete('/invoices/:id', invoicesController.deleteInvoice);
