@@ -8,10 +8,10 @@ Host: localhost:3000
 Content-Type: application/json
 
 {
-  "item": "Freelance Project Budget",
-  "amount": "100.00",
-  "quantity": "1",
-  "tax": "0.00",
-  "date": "2019-01-01",
-  "dueDate": "2019-01-01"
+  "item": "Contract Project Budget",
+  "quantity": 2,
+  "amount": 200.00,
+  "tax": 2.00,
+  "date": "2020-01-01",
+  "dueDate": "2020-03-01"
 }

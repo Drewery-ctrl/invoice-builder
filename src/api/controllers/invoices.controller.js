@@ -1,3 +1,4 @@
+import Joi from 'joi';
 import Invoice from '../models/invoice.model';
 
 export const findAllInvoices = async (req, res) => {
@@ -13,20 +14,25 @@ export const findAllInvoices = async (req, res) => {
 
 export const createInvoice = async (req, res) => {
   try {
-    const {
-      item, quantity, amount, tax, date, dueDate
-    } = req.body;
-    if (!item || !quantity || !amount || !tax || !date || !dueDate) {
+    const schema = Joi.object().keys({
+      item: Joi.string().required(),
+      quantity: Joi.number().integer().required(),
+      amount: Joi.number().required(),
+      tax: Joi.number().required(),
+      date: Joi.date().required(),
+      dueDate: Joi.date().required(),
+    });
+
+    const { error, value } = schema.validate(req.body);
+
+    if (error && error.details) {
       return res.status(400).json({
-        message: 'Please provide all required fields - item, quantity, amount, tax, date, dueDate',
+        message: error.details[0].message,
       });
     }
-    Invoice.create({
-      item, quantity, amount, tax, date, dueDate
-    }).then((invoice) => res.status(201).json(invoice));
+
+    Invoice.create(value).then((invoice) => res.status(201).json(invoice));
   } catch (error) {
-    res.status(500).json({
-      message: error.message,
-    });
+    res.status(500).json({ message: error.message });
   }
 };

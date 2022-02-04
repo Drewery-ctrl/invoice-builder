@@ -7,7 +7,7 @@ const invoiceSchema = new Schema({
   quantity: { type: Number, required: true },
   amount: { type: Number, required: true },
   tax: { type: Number, required: true },
-  date: { type: Date, default: Date.now, required: true },
+  date: { type: Date, required: true },
   dueDate: { type: Date, required: true },
 }, { timestamps: true });
 
