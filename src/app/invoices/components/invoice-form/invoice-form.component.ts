@@ -1,9 +1,6 @@
 import {Component, OnInit} from '@angular/core';
-import {Invoice} from '../../models/invoice';
+import {FormBuilder, FormGroup} from "@angular/forms";
 
-export interface InvoiceForm extends Invoice {
-  id: number;
-}
 
 @Component({
    selector: 'app-invoice-form',
@@ -11,12 +8,28 @@ export interface InvoiceForm extends Invoice {
    styleUrls: ['./invoice-form.component.scss']
 })
 export class InvoiceFormComponent implements OnInit {
+   invoiceForm: FormGroup;
 
-
-   constructor() {
+   constructor(private fb: FormBuilder) {
    }
 
-   ngOnInit(): void {
+   ngOnInit(){
+      this.createForm();
    }
 
+   createForm() {
+      this.invoiceForm = this.fb.group({
+         item: '',
+         quantity: '',
+         amount: '',
+         tax: '',
+         date: '',
+         dueDate: ''
+      })
+   }
+
+   onSubmit() {
+      debugger;
+      console.log(this.invoiceForm.value);
+   }
 }
