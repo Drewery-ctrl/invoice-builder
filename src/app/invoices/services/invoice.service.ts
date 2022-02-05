@@ -13,6 +13,10 @@ export class InvoiceService {
    constructor(private httpClient: HttpClient) {
    }
 
+   getInvoiceById(id: string): Observable<Invoice> {
+      return this.httpClient.get<Invoice>(`${BASE_URL}/invoices/${id}`);
+   }
+
    getInvoices(): Observable<Invoice[]> {
       return this.httpClient.get<Invoice[]>(`${BASE_URL}/invoices`);
    }
@@ -23,5 +27,9 @@ export class InvoiceService {
 
    deleteInvoice(id: string): Observable<Invoice> {
       return this.httpClient.delete<Invoice>(`${BASE_URL}/invoices/${id}`);
+   }
+
+   updateInvoice(id: string | null, body: Invoice) {
+      return this.httpClient.put<Invoice>(`${BASE_URL}/invoices/${id}`, body);
    }
 }

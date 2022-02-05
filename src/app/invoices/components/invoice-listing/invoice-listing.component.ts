@@ -29,7 +29,7 @@ export class InvoiceListingComponent implements OnInit {
       await this._router.navigate(['dashboard', 'invoices', 'new']);
    }
 
-   async deleteInvoice(id: string) {
+   async deleteInvoiceHandler(id: string) {
       await this.invoiceService.deleteInvoice(id).subscribe((invoice) => {
          remove(this.dataSource, (item) => {
             return item._id === invoice._id;
@@ -46,5 +46,9 @@ export class InvoiceListingComponent implements OnInit {
       this._snackBar.open(displayMessage, 'Error', {
          duration: 2000,
       });
+   }
+
+   async editInvoiceHandler(invoiceId: any) {
+      await this._router.navigate(['dashboard', 'invoices', invoiceId]);
    }
 }

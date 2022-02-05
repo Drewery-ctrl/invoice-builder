@@ -52,11 +52,11 @@
             <mat-icon>more_vert</mat-icon>
          </button>
          <mat-menu #menu="matMenu">
-            <button mat-menu-item>
+            <button mat-menu-item (click)="editInvoiceHandler(invoice._id)">
                <mat-icon>edit</mat-icon>
                <span>Edit</span>
             </button>
-            <button mat-menu-item (click)="deleteInvoice(invoice._id)">
+            <button mat-menu-item (click)="deleteInvoiceHandler(invoice._id)">
                <mat-icon>delete</mat-icon>
                <span>Delete</span>
             </button>

@@ -1,5 +1,5 @@
 export class Invoice {
-   _id: number;
+   _id: string;
    item: string;
    amount: number;
    tax: number;
