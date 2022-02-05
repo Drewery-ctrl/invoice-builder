@@ -1,5 +1,4 @@
 <mat-card>
-   {{this.invoiceForm.value | json}}
    <form class="form-container" [formGroup]="invoiceForm" novalidate (ngSubmit)="onSubmit()">
       <mat-card-header>
          <mat-card-title>
@@ -33,18 +32,16 @@
 
       <mat-form-field>
          <mat-label>Date</mat-label>
-         <input matInput [matDatepicker]="date" placeholder="choose project start date" formControlName="date">
+         <input matInput [matDatepicker]="date" placeholder="choose project start date - click icon for picker" formControlName="date">
          <mat-datepicker-toggle matSuffix [for]="date"></mat-datepicker-toggle>
          <mat-datepicker #date></mat-datepicker>
-         <mat-icon matSuffix>date_range</mat-icon>
       </mat-form-field>
 
       <mat-form-field>
          <mat-label>Due Date</mat-label>
-         <input matInput [matDatepicker]="due" placeholder="choose project due date" formControlName="dueDate">
+         <input matInput [matDatepicker]="due" placeholder="choose project due date - click icon for picker" formControlName="dueDate">
          <mat-datepicker-toggle matSuffix [for]="due"></mat-datepicker-toggle>
          <mat-datepicker #due></mat-datepicker>
-         <mat-icon matSuffix>date_range</mat-icon>
       </mat-form-field>
 
       <div class="form-group" style="display: flex; justify-content: space-between; margin-bottom: 8px;">
