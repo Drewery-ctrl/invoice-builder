@@ -38,3 +38,7 @@ Content-Type: application/json
 ### Delete Invoice by ID
 DELETE /api/v1/invoices/61fc79b686c2a60e1b0f8ca3 HTTP/1.1
 Host: localhost:3001
+
+### Query Invoices by Page & Limit
+GET /api/v1/invoices?page=1&perPage=5 HTTP/1.1
+Host: localhost:3001

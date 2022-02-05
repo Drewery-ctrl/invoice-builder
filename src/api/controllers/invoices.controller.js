@@ -4,7 +4,12 @@ import Invoice from '../models/invoice.model';
 
 export const findAllInvoices = async (req, res) => {
   try {
-    const invoices = await Invoice.find();
+    const { page = 1, perPage = 10 } = req.query;
+    const options = {
+      page: parseInt(page, 10),
+      limit: parseInt(perPage, 10),
+    };
+    const invoices = await Invoice.paginate({}, options);
     res.status(HttpStatus.OK).json(invoices);
   } catch (error) {
     res.status(HttpStatus.INTERNAL_SERVER_ERROR).json({ message: error.message });

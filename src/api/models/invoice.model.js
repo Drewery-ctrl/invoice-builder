@@ -1,4 +1,5 @@
 import mongoose from 'mongoose';
+import mongoosePaginate from 'mongoose-paginate';
 
 const { Schema } = mongoose;
 
@@ -11,4 +12,5 @@ const invoiceSchema = new Schema({
   dueDate: { type: Date, required: true },
 }, { timestamps: true });
 
+invoiceSchema.plugin(mongoosePaginate);
 export default mongoose.model('Invoice', invoiceSchema);
