@@ -13,6 +13,7 @@ import {Invoice} from '../../models/invoice';
 })
 export class InvoiceFormComponent implements OnInit {
    private invoice: Invoice;
+   hasPrivateData: boolean = false;
    invoiceForm: FormGroup;
 
    constructor(
@@ -33,6 +34,7 @@ export class InvoiceFormComponent implements OnInit {
       if (id) {
          this.invoiceService.getInvoiceById(id).subscribe(invoice => {
             this.invoice = invoice;
+            this.hasPrivateData = true;
             this.invoiceForm.patchValue(invoice);
          }, error => {
             this.errorHandler(error, 'Failed to get invoice');
