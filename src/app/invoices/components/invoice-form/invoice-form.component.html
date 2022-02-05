@@ -6,38 +6,38 @@
          </mat-card-title>
       </mat-card-header>
 
-      <mat-form-field appearance="standard">
+      <mat-form-field color="accent">
          <mat-label>Item</mat-label>
          <input matInput placeholder="enter item name for this invoice" formControlName="item">
          <mat-icon matSuffix>item</mat-icon>
       </mat-form-field>
 
-      <mat-form-field>
+      <mat-form-field color="accent">
          <mat-label>Amount</mat-label>
          <input matInput placeholder="budget amount" formControlName="amount">
          <mat-icon matSuffix>paid</mat-icon>
       </mat-form-field>
 
-      <mat-form-field>
+      <mat-form-field color="accent">
          <mat-label>Quantity</mat-label>
          <input matInput placeholder="how many projects in this budget" formControlName="quantity">
          <mat-icon matSuffix>production_quantity_limits</mat-icon>
       </mat-form-field>
 
-      <mat-form-field>
+      <mat-form-field color="accent">
          <mat-label>Tax</mat-label>
          <input matInput placeholder="how much tax was billed for this budget" formControlName="tax">
          <mat-icon matSuffix>attach_money</mat-icon>
       </mat-form-field>
 
-      <mat-form-field>
+      <mat-form-field color="accent">
          <mat-label>Date</mat-label>
          <input matInput [matDatepicker]="date" placeholder="choose project start date - click icon for picker" formControlName="date">
          <mat-datepicker-toggle matSuffix [for]="date"></mat-datepicker-toggle>
          <mat-datepicker #date></mat-datepicker>
       </mat-form-field>
 
-      <mat-form-field>
+      <mat-form-field color="accent">
          <mat-label>Due Date</mat-label>
          <input matInput [matDatepicker]="due" placeholder="choose project due date - click icon for picker" formControlName="dueDate">
          <mat-datepicker-toggle matSuffix [for]="due"></mat-datepicker-toggle>
