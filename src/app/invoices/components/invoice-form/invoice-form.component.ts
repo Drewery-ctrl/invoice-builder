@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {FormBuilder, FormGroup} from "@angular/forms";
+import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {InvoiceService} from '../../services/invoice.service';
 
 
@@ -20,12 +20,12 @@ export class InvoiceFormComponent implements OnInit {
 
    createForm() {
       this.invoiceForm = this.fb.group({
-         item: '',
-         quantity: '',
+         item: ['', Validators.required],
+         quantity: ['', Validators.required],
          amount: '',
          tax: '',
-         date: '',
-         dueDate: ''
+         date: ['', Validators.required],
+         dueDate: ['', Validators.required],
       })
    }
 
