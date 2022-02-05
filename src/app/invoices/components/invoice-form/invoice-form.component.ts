@@ -1,6 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {InvoiceService} from '../../services/invoice.service';
+import {MatSnackBar} from "@angular/material/snack-bar";
+import {Router} from "@angular/router";
 
 
 @Component({
@@ -11,7 +13,11 @@ import {InvoiceService} from '../../services/invoice.service';
 export class InvoiceFormComponent implements OnInit {
    invoiceForm: FormGroup;
 
-   constructor(private fb: FormBuilder, private invoiceService: InvoiceService) {
+   constructor(
+      private fb: FormBuilder,
+      private invoiceService: InvoiceService,
+      private _snackBar: MatSnackBar,
+      private router: Router) {
    }
 
    ngOnInit() {
@@ -30,9 +36,25 @@ export class InvoiceFormComponent implements OnInit {
    }
 
    onSubmit() {
-      this.invoiceService.createInvoice(this.invoiceForm.value).subscribe(res => {
+      this.invoiceService.createInvoice(this.invoiceForm.value).subscribe(async () => {
+         this._snackBar.open('Invoice created', 'Success', {
+            duration: 2000,
+         });
          this.invoiceForm.reset();
-         console.log(res);
+         await this.router.navigate(['dashboard', 'invoices']);
+      }, error => {
+         this.errorHandler(error, 'Error creating invoice');
+      });
+   }
+
+   openSnackBar(message: string, action: string) {
+      this._snackBar.open(message, action);
+   }
+
+   private errorHandler(error: any, displayMessage: string) {
+      console.log(error);
+      this._snackBar.open(displayMessage, 'Error', {
+         duration: 2000,
       });
    }
 }
