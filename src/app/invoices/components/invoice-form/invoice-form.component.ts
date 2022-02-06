@@ -12,8 +12,9 @@ import {Invoice} from '../../models/invoice';
    styleUrls: ['./invoice-form.component.scss']
 })
 export class InvoiceFormComponent implements OnInit {
+   routeId: string | null;
    private invoice: Invoice;
-   hasPrivateData: boolean = false;
+   isAddMode: boolean = false;
    invoiceForm: FormGroup;
 
    constructor(
@@ -25,16 +26,16 @@ export class InvoiceFormComponent implements OnInit {
    }
 
    ngOnInit() {
+      this.routeId = this.route.snapshot.paramMap.get('id');
+      this.isAddMode = !this.routeId;
       this.createForm();
       this.displayInvoiceOnForm();
    }
 
    private displayInvoiceOnForm() {
-      const id = this.route.snapshot.paramMap.get('id');
-      if (id) {
-         this.invoiceService.getInvoiceById(id).subscribe(invoice => {
+      if (this.routeId) {
+         this.invoiceService.getInvoiceById(this.routeId).subscribe(invoice => {
             this.invoice = invoice;
-            this.hasPrivateData = true;
             this.invoiceForm.patchValue(invoice);
          }, error => {
             this.errorHandler(error, 'Failed to get invoice');
