@@ -1,12 +1,13 @@
-.demo-table {
+.invoice-table {
    width: 80%;
 }
 
-.invoice-container {
+.invoice-table-container {
    display: flex;
    flex-direction: column;
    max-height: 500px;
-   min-height: 300px;
+   min-width: 300px;
+   position: relative;
 }
 
 .mat-table {
@@ -51,4 +52,17 @@
 .action-button {
    color: rgb(225, 255, 255);
    background-color: #ff4081;
+}
+
+.loading-shade {
+   position: absolute;
+   top: 0;
+   left: 0;
+   bottom: 56px;
+   right: 0;
+   background: rgba(0, 0, 0, 0.15);
+   z-index: 1;
+   display: flex;
+   align-items: center;
+   justify-content: center;
 }

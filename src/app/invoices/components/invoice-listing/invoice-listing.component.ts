@@ -16,32 +16,37 @@ export class InvoiceListingComponent implements OnInit {
    displayedColumns: string[] = ['ITEM', 'AMOUNT', 'QUANTITY', 'TAX', 'DATE', 'DUE DATE', 'ACTIONS'];
    dataSource: Invoice[] = [];
    resultsLength = 0;
+   isLoadingResults = false;
 
    constructor(private invoiceService: InvoiceService, private _router: Router, private _snackBar: MatSnackBar) {
    }
 
    async ngOnInit() {
       this.paginator.page.subscribe(async (event) => {
-         this.invoiceService.getInvoices({page: ++event.pageIndex, perPage: event.pageSize}).subscribe({
+         this.isLoadingResults = true;
+         return this.invoiceService.getInvoices({page: ++event.pageIndex, perPage: event.pageSize}).subscribe({
             next: invoices => {
                this.dataSource = invoices.docs;
                this.resultsLength = invoices.total;
+               this.isLoadingResults = false;
             },
             error: err => {
                this.errorHandler(err, 'Failed to load invoices');
             }
          });
       });
-
       await this.populateInvoices();
    }
 
    async populateInvoices() {
+      this.isLoadingResults = true;
       this.invoiceService.getInvoices({page: 1, perPage: 10}).subscribe(invoices => {
          this.resultsLength = invoices.docs.length;
          this.dataSource = invoices.docs;
       }, error => {
          this.errorHandler(error, 'Failed to load invoices');
+      }, () => {
+         this.isLoadingResults = false;
       });
    }
 
@@ -63,6 +68,7 @@ export class InvoiceListingComponent implements OnInit {
    }
 
    private errorHandler(error: any, displayMessage: string) {
+      this.isLoadingResults = false;
       console.log(error);
       this._snackBar.open(displayMessage, 'Error', {
          duration: 2000,
