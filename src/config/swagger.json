@@ -49,6 +49,27 @@
                   "required": false,
                   "type": "integer",
                   "format": "int32"
+               },
+               {
+                  "name": "filter",
+                  "in": "query",
+                  "description": "filter invoices by item name",
+                  "required": false,
+                  "type": "string"
+               },
+               {
+                  "name": "sortField",
+                  "in": "query",
+                  "description": "define what field to sort by",
+                  "required": false,
+                  "type": "string"
+               },
+               {
+                  "name": "sortDir",
+                  "in": "query",
+                  "description": "define what direction to sort by - asc or desc",
+                  "required": false,
+                  "type": "string"
                }
             ],
             "responses": {
