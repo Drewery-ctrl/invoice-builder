@@ -1,4 +1,4 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
+import {AfterViewInit, Component, OnInit, ViewChild} from '@angular/core';
 import {InvoiceService} from "../../services/invoice.service";
 import {Invoice} from "../../models/invoice";
 import {Router} from "@angular/router";
@@ -11,7 +11,7 @@ import {MatPaginator} from '@angular/material/paginator';
    templateUrl: './invoice-listing.component.html',
    styleUrls: ['./invoice-listing.component.scss']
 })
-export class InvoiceListingComponent implements OnInit {
+export class InvoiceListingComponent implements OnInit, AfterViewInit {
    @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
    displayedColumns: string[] = ['ITEM', 'AMOUNT', 'QUANTITY', 'TAX', 'DATE', 'DUE DATE', 'ACTIONS'];
    dataSource: Invoice[] = [];
@@ -21,7 +21,11 @@ export class InvoiceListingComponent implements OnInit {
    constructor(private invoiceService: InvoiceService, private _router: Router, private _snackBar: MatSnackBar) {
    }
 
-   async ngOnInit() {
+   ngOnInit() {
+
+   }
+
+   ngAfterViewInit() {
       this.paginator.page.subscribe(async (event) => {
          this.isLoadingResults = true;
          return this.invoiceService.getInvoices({page: ++event.pageIndex, perPage: event.pageSize}).subscribe({
@@ -35,10 +39,10 @@ export class InvoiceListingComponent implements OnInit {
             }
          });
       });
-      await this.populateInvoices();
+      this.populateInvoices();
    }
 
-   async populateInvoices() {
+   populateInvoices() {
       this.isLoadingResults = true;
       this.invoiceService.getInvoices({page: 1, perPage: 10}).subscribe(invoices => {
          this.resultsLength = invoices.docs.length;
