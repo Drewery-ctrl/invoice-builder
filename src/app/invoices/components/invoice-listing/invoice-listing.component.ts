@@ -5,6 +5,7 @@ import {Router} from "@angular/router";
 import {MatSnackBar} from "@angular/material/snack-bar";
 import {remove} from "lodash";
 import {MatPaginator} from '@angular/material/paginator';
+import {MatSort} from '@angular/material/sort';
 
 @Component({
    selector: 'app-invoice-listing',
@@ -13,6 +14,7 @@ import {MatPaginator} from '@angular/material/paginator';
 })
 export class InvoiceListingComponent implements OnInit, AfterViewInit {
    @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
+   @ViewChild(MatSort, {static: true}) sort: MatSort;
    displayedColumns: string[] = ['ITEM', 'AMOUNT', 'QUANTITY', 'TAX', 'DATE', 'DUE DATE', 'ACTIONS'];
    dataSource: Invoice[] = [];
    resultsLength = 0;
@@ -28,7 +30,12 @@ export class InvoiceListingComponent implements OnInit, AfterViewInit {
    ngAfterViewInit() {
       this.paginator.page.subscribe(async (event) => {
          this.isLoadingResults = true;
-         return this.invoiceService.getInvoices({page: ++event.pageIndex, perPage: event.pageSize}).subscribe({
+         return this.invoiceService.getInvoices({
+            page: ++event.pageIndex,
+            perPage: event.pageSize,
+            sortField: this.sort.active,
+            sortDir: this.sort.direction
+         }).subscribe({
             next: invoices => {
                this.dataSource = invoices.docs;
                this.resultsLength = invoices.total;
@@ -39,18 +46,54 @@ export class InvoiceListingComponent implements OnInit, AfterViewInit {
             }
          });
       });
+
+      this.sort.sortChange.subscribe(() => {
+         this.paginator.pageIndex = 0;
+         this.paginator.page.next({
+            pageIndex: 0,
+            pageSize: this.paginator.pageSize,
+            length: this.resultsLength
+         });
+         this.isLoadingResults = true;
+         return this.invoiceService.getInvoices({
+            page: this.paginator.pageIndex + 1,
+            perPage: this.paginator.pageSize,
+            sortField: this.sort.active,
+            sortDir: this.sort.direction
+         }).subscribe({
+            next: invoices => {
+               this.dataSource = invoices.docs;
+               this.resultsLength = invoices.total;
+               this.isLoadingResults = false;
+            },
+            error: err => {
+               this.errorHandler(err, 'Failed to sort invoices');
+            }
+         });
+      });
       this.populateInvoices();
+
    }
 
    populateInvoices() {
       this.isLoadingResults = true;
-      this.invoiceService.getInvoices({page: 1, perPage: 10}).subscribe(invoices => {
-         this.resultsLength = invoices.docs.length;
-         this.dataSource = invoices.docs;
-      }, error => {
-         this.errorHandler(error, 'Failed to load invoices');
-      }, () => {
-         this.isLoadingResults = false;
+      this.invoiceService.getInvoices({
+         page: 1,
+         perPage: 10,
+         sortField: this.sort.active,
+         sortDir: this.sort.direction
+      }).subscribe({
+         next: invoices => {
+            this.dataSource = invoices.docs;
+            this.resultsLength = invoices.total;
+            this.isLoadingResults = false;
+         },
+         error: err => {
+            this.errorHandler(err, 'Failed to load invoices');
+         },
+         complete: () => {
+            this.isLoadingResults = false;
+         }
       });
    }
 

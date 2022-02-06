@@ -17,8 +17,12 @@ export class InvoiceService {
       return this.httpClient.get<Invoice>(`${BASE_URL}/invoices/${id}`);
    }
 
-   getInvoices({page, perPage}: { page: number, perPage: number }): Observable<InvoicePaginatedResponse> {
-      return this.httpClient.get<InvoicePaginatedResponse>(`${BASE_URL}/invoices?page=${page}&perPage=${perPage}`);
+   getInvoices({page, perPage, sortDir, sortField}: { page: number, perPage: number, sortField: string, sortDir: string }): Observable<InvoicePaginatedResponse> {
+      let queryString = `${BASE_URL}/invoices?page=${page}&perPage=${perPage}`;
+      if (sortField && sortDir) {
+         queryString += `&sortField=${sortField}&sortDir=${sortDir}`;
+      }
+      return this.httpClient.get<InvoicePaginatedResponse>(queryString);
    }
 
    createInvoice(body: Invoice): Observable<Invoice> {
