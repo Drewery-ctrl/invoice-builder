@@ -4,14 +4,17 @@ import Invoice from '../models/invoice.model';
 
 export const findAllInvoices = async (req, res) => {
   try {
-    const { page = 1, perPage = 10, filter } = req.query;
+    const { page = 1, perPage = 10, filter, sortField, sortDir } = req.query;
     const options = {
       page: parseInt(page, 10),
-      limit: parseInt(perPage, 10),
+      limit: parseInt(perPage, 10)
     };
     const query = {};
     if (filter) {
       query.item = { $regex: filter, $options: 'i' };
+    }
+    if (sortField && sortDir) {
+      options.sort = { [sortField]: sortDir };
     }
     await Invoice.paginate(query, options).then((response) => {
       setTimeout(() => {
