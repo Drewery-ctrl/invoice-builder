@@ -30,14 +30,22 @@
          "get": {
             "tags": [ "Invoices" ],
             "summary": "Retrieve all invoices from database",
-            "description": "Returns all invoices from the system that the user has access to",
+            "description": "Returns all invoices from the database that the user has access to",
             "operationId": "findAllInvoices",
             "produces": [ "application/json" ],
             "parameters": [
                {
-                  "name": "limit",
+                  "name": "page",
                   "in": "query",
-                  "description": "maximum number of results to return",
+                  "description": "number of page to return",
+                  "required": false,
+                  "type": "integer",
+                  "format": "int32"
+               },
+               {
+                  "name": "perPage",
+                  "in": "query",
+                  "description": "number of records per page",
                   "required": false,
                   "type": "integer",
                   "format": "int32"
@@ -45,11 +53,11 @@
             ],
             "responses": {
                "200": {
-                  "description": "pet response",
+                  "description": "Invoices response",
                   "schema": {
                      "type": "array",
                      "items": {
-                        "$ref": "#/definitions/Invoice"
+                        "$ref": "#/definitions/Invoices"
                      }
                   }
                },
@@ -214,9 +222,23 @@
          }
       },
       "Invoices": {
-         "type": "array",
-         "items": {
-            "$ref": "#/definitions/Invoice"
+         "properties": {
+            "docs": {
+               "type": "array",
+               "$ref": "#/definitions/Invoice"
+            },
+            "total": {
+               "type": "integer"
+            },
+            "page": {
+               "type": "integer"
+            },
+            "pages ": {
+               "type": "integer"
+            },
+            "limit": {
+               "type": "integer"
+            }
          }
       },
       "UpdateInvoice": {
