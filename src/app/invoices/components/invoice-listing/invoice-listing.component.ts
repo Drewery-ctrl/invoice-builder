@@ -70,9 +70,7 @@ export class InvoiceListingComponent implements OnInit {
    private errorHandler(error: any, displayMessage: string) {
       this.isLoadingResults = false;
       console.log(error);
-      this._snackBar.open(displayMessage, 'Error', {
-         duration: 2000,
-      });
+      this._snackBar.open(displayMessage, 'Error', {duration: 2000});
    }
 
    async editInvoiceHandler(invoiceId: any) {
