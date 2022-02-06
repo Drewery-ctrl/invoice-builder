@@ -4,7 +4,7 @@ import logger from 'morgan';
 import cors from 'cors';
 import swaggerUI from 'swagger-ui-express';
 import swaggerDocument from './config/swagger.json';
-import { router } from './config/routes';
+import restRouter from './api/index';
 
 const app = express();
 const PORT = process.env.PORT || 3001;
@@ -14,7 +14,7 @@ app.use(cors());
 app.use(express.urlencoded({ extended: true }));
 app.use(logger('dev'));
 app.use('/api-docs', swaggerUI.serve, swaggerUI.setup(swaggerDocument, { explorer: true }));
-app.use('/api/v1', router);
+app.use('/api/v1', restRouter);
 
 mongoose.Promise = global.Promise;
 mongoose.connect('mongodb://localhost/invoice-builder').then(
