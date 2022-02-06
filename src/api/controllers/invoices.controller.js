@@ -9,8 +9,11 @@ export const findAllInvoices = async (req, res) => {
       page: parseInt(page, 10),
       limit: parseInt(perPage, 10),
     };
-    const invoices = await Invoice.paginate({}, options);
-    res.status(HttpStatus.OK).json(invoices);
+    await Invoice.paginate({}, options).then((response) => {
+      setTimeout(() => {
+        res.status(HttpStatus.OK).json(response);
+      }, 500);
+    });
   } catch (error) {
     res.status(HttpStatus.INTERNAL_SERVER_ERROR).json({ message: error.message });
   }
