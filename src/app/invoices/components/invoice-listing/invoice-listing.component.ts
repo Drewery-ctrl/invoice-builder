@@ -24,29 +24,34 @@ export class InvoiceListingComponent implements OnInit, AfterViewInit {
    }
 
    ngOnInit() {
-
+      this.populateInvoices();
    }
 
    ngAfterViewInit() {
+      // If user clicks arrow next button request is made to get next page
       this.paginator.page.subscribe(async (event) => {
          this.isLoadingResults = true;
          return this.invoiceService.getInvoices({
             page: ++event.pageIndex,
             perPage: event.pageSize,
             sortField: this.sort.active,
-            sortDir: this.sort.direction
+            sortDir: this.sort.direction,
+            filter: ''
          }).subscribe({
             next: invoices => {
                this.dataSource = invoices.docs;
                this.resultsLength = invoices.total;
-               this.isLoadingResults = false;
             },
             error: err => {
                this.errorHandler(err, 'Failed to load invoices');
+            },
+            complete: () => {
+               this.isLoadingResults = false;
             }
          });
       });
 
+      // handles sorting in the table
       this.sort.sortChange.subscribe(() => {
          this.paginator.pageIndex = 0;
          this.paginator.page.next({
@@ -59,20 +64,21 @@ export class InvoiceListingComponent implements OnInit, AfterViewInit {
             page: this.paginator.pageIndex + 1,
             perPage: this.paginator.pageSize,
             sortField: this.sort.active,
-            sortDir: this.sort.direction
+            sortDir: this.sort.direction,
+            filter: ''
          }).subscribe({
             next: invoices => {
                this.dataSource = invoices.docs;
                this.resultsLength = invoices.total;
-               this.isLoadingResults = false;
             },
             error: err => {
                this.errorHandler(err, 'Failed to sort invoices');
+            },
+            complete: () => {
+               this.isLoadingResults = false;
             }
          });
       });
-      this.populateInvoices();
-
    }
 
    populateInvoices() {
@@ -81,7 +87,8 @@ export class InvoiceListingComponent implements OnInit, AfterViewInit {
          page: 1,
          perPage: 10,
          sortField: this.sort.active,
-         sortDir: this.sort.direction
+         sortDir: this.sort.direction,
+         filter: ''
       }).subscribe({
          next: invoices => {
             this.dataSource = invoices.docs;
@@ -120,7 +127,30 @@ export class InvoiceListingComponent implements OnInit, AfterViewInit {
       this._snackBar.open(displayMessage, 'Error', {duration: 2000});
    }
 
-   async editInvoiceHandler(invoiceId: any) {
+   async editInvoiceHandler(invoiceId: Event) {
       await this._router.navigate(['dashboard', 'invoices', invoiceId]);
+   }
+
+   applyFilter(filterValue: KeyboardEvent) {
+      this.paginator.pageIndex = 0;
+      const valueToFilter = (filterValue.target as HTMLInputElement).value.trim();
+      this.invoiceService.getInvoices({
+         page: this.paginator.pageIndex + 1,
+         perPage: this.paginator.pageSize,
+         sortField: this.sort.active,
+         sortDir: this.sort.direction,
+         filter: valueToFilter
+      }).subscribe({
+         next: invoices => {
+            this.dataSource = invoices.docs;
+            this.resultsLength = invoices.total;
+         },
+         error: err => {
+            this.errorHandler(err, 'Failed to filter invoices');
+         },
+         complete: () => {
+            this.isLoadingResults = false;
+         }
+      });
    }
 }

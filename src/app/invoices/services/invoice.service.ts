@@ -17,10 +17,13 @@ export class InvoiceService {
       return this.httpClient.get<Invoice>(`${BASE_URL}/invoices/${id}`);
    }
 
-   getInvoices({page, perPage, sortDir, sortField}: { page: number, perPage: number, sortField: string, sortDir: string }): Observable<InvoicePaginatedResponse> {
+   getInvoices({page, perPage, sortDir, sortField, filter}: { page: number, perPage: number, sortField: string, sortDir: string, filter: string }): Observable<InvoicePaginatedResponse> {
       let queryString = `${BASE_URL}/invoices?page=${page}&perPage=${perPage}`;
       if (sortField && sortDir) {
          queryString += `&sortField=${sortField}&sortDir=${sortDir}`;
+      }
+      if (filter) {
+         queryString += `&filter=${filter}`;
       }
       return this.httpClient.get<InvoicePaginatedResponse>(queryString);
    }

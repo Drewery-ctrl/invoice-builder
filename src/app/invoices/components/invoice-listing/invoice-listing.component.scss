@@ -47,6 +47,7 @@
    width: 80%;
    display: flex;
    justify-content: space-between;
+
 }
 
 .action-button {
@@ -65,4 +66,13 @@
    display: flex;
    align-items: center;
    justify-content: center;
+}
+
+.search-bar {
+   width: 20%;
+   border-bottom: none;
+}
+
+::ng-deep .mat-form-field-appearance-outline.mat-form-field-disabled .mat-form-field-outline {
+   opacity: 0;
 }
