@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {Observable} from "rxjs";
-import {Invoice} from "../models/invoice";
+import {Invoice, InvoicePaginatedResponse} from "../models/invoice";
 
 const BASE_URL = 'http://localhost:3001/api/v1';
 
@@ -17,8 +17,8 @@ export class InvoiceService {
       return this.httpClient.get<Invoice>(`${BASE_URL}/invoices/${id}`);
    }
 
-   getInvoices(): Observable<Invoice[]> {
-      return this.httpClient.get<Invoice[]>(`${BASE_URL}/invoices`);
+   getInvoices(): Observable<InvoicePaginatedResponse> {
+      return this.httpClient.get<InvoicePaginatedResponse>(`${BASE_URL}/invoices`);
    }
 
    createInvoice(body: Invoice): Observable<Invoice> {

@@ -2,8 +2,8 @@
    <form class="form-container" [formGroup]="invoiceForm" novalidate (ngSubmit)="onSubmit()">
       <mat-card-header>
          <mat-card-title>
-            <h2 *ngIf="!isAddMode">Create Invoice</h2>
-            <h2 *ngIf="isAddMode">Update Invoice</h2>
+            <h2 *ngIf="!isEditMode">Create Invoice</h2>
+            <h2 *ngIf="isEditMode">Update Invoice</h2>
          </mat-card-title>
       </mat-card-header>
 
@@ -51,8 +51,8 @@
 
       <div class="form-group" style="display: flex; justify-content: space-between; margin-bottom: 8px;">
          <button mat-raised-button color="accent" type="submit" [disabled]="!invoiceForm.valid">
-            <span *ngIf="!isAddMode">Create Invoice</span>
-            <span *ngIf="isAddMode">Update Invoice</span>
+            <span *ngIf="!isEditMode">Create Invoice</span>
+            <span *ngIf="isEditMode">Update Invoice</span>
          </button>
          <button mat-raised-button color="primary" type="reset" (click)="onCancel()">Cancel</button>
       </div>

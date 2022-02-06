@@ -14,7 +14,7 @@ import {Invoice} from '../../models/invoice';
 export class InvoiceFormComponent implements OnInit {
    routeId: string | null;
    private invoice: Invoice;
-   isAddMode: boolean = false;
+   isEditMode: boolean;
    invoiceForm: FormGroup;
 
    constructor(
@@ -27,7 +27,7 @@ export class InvoiceFormComponent implements OnInit {
 
    ngOnInit() {
       this.routeId = this.route.snapshot.paramMap.get('id');
-      this.isAddMode = !this.routeId;
+      this.isEditMode = !!this.routeId;
       this.createForm();
       this.displayInvoiceOnForm();
    }

@@ -7,3 +7,12 @@ export class Invoice {
    date: Date;
    dueDate: Date;
 }
+
+
+export class InvoicePaginatedResponse {
+   docs: Invoice[] = [];
+   total: number;
+   page: number;
+   pages: number;
+   limit: number;
+}

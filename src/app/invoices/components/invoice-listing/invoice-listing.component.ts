@@ -19,8 +19,7 @@ export class InvoiceListingComponent implements OnInit {
 
    ngOnInit() {
       this.invoiceService.getInvoices().subscribe(invoices => {
-         console.log(invoices);
-         this.dataSource = invoices;
+         this.dataSource = invoices.docs;
       }, error => {
          this.errorHandler(error, 'Failed to load invoices');
       });
