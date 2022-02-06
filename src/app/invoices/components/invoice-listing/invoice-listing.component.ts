@@ -22,11 +22,17 @@ export class InvoiceListingComponent implements OnInit {
 
    async ngOnInit() {
       this.paginator.page.subscribe(async (event) => {
-         this.invoiceService.getInvoices({page: ++event.pageIndex, perPage: event.pageSize}).subscribe(invoices => {
-            this.dataSource = invoices.docs;
-            this.resultsLength = invoices.total;
-         })
+         this.invoiceService.getInvoices({page: ++event.pageIndex, perPage: event.pageSize}).subscribe({
+            next: invoices => {
+               this.dataSource = invoices.docs;
+               this.resultsLength = invoices.total;
+            },
+            error: err => {
+               this.errorHandler(err, 'Failed to load invoices');
+            }
+         });
       });
+
       await this.populateInvoices();
    }
 
