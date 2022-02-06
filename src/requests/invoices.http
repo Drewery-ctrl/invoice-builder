@@ -42,3 +42,7 @@ Host: localhost:3001
 ### Query Invoices by Page & Limit
 GET /api/v1/invoices?page=1&perPage=5 HTTP/1.1
 Host: localhost:3001
+
+### Filter Invoices by item name
+GET /api/v1/invoices?filter=Angular HTTP/1.1
+Host: localhost:3001
