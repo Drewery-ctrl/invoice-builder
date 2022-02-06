@@ -17,8 +17,8 @@ export class InvoiceService {
       return this.httpClient.get<Invoice>(`${BASE_URL}/invoices/${id}`);
    }
 
-   getInvoices(): Observable<InvoicePaginatedResponse> {
-      return this.httpClient.get<InvoicePaginatedResponse>(`${BASE_URL}/invoices`);
+   getInvoices({page, perPage}: { page: number, perPage: number }): Observable<InvoicePaginatedResponse> {
+      return this.httpClient.get<InvoicePaginatedResponse>(`${BASE_URL}/invoices?page=${page}&perPage=${perPage}`);
    }
 
    createInvoice(body: Invoice): Observable<Invoice> {

@@ -1,7 +1,7 @@
 <mat-toolbar class='menu-bar'>
    <span>Invoices</span>
    <!--   <span class='flex-spacer'></span>-->
-   <button mat-button (click)='addInvoice()' class='action-button' >
+   <button mat-button (click)='createInvoiceHandler()' class='action-button' >
       <mat-icon>add</mat-icon>
       <span>Add Invoice</span>
    </button>
@@ -66,5 +66,12 @@
 
    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
 </table>
 
+<mat-paginator #paginator class="demo-table"
+               pageIndex="0"
+               [length]="resultsLength"
+               [pageSize]="10"
+               [pageSizeOptions]="[5, 10, 15, 20]">
+</mat-paginator>
