@@ -4,8 +4,18 @@ Host: localhost:3001
 Content-Type: application/json
 
 {
-   "firstName": "Jerry",
-   "lastName": "Johnson",
-   "email": "jerry@gmail.com",
+   "firstName": "Nico",
+   "lastName": "Orgaseen",
+   "email": "nico@gmail.com",
    "phone": "1234567890"
 }
+
+### Get All Clients
+GET /api/v1/clients HTTP/1.1
+Host: localhost:3001
+Content-Type: application/json
+
+### Get Client By ID
+GET /api/v1/clients/62019b67da963a8c843e1720 HTTP/1.1
+Host: localhost:3001
+Content-Type: application/json

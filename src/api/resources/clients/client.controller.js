@@ -19,11 +19,27 @@ export const createClient = async ( req, res ) => {
 };
 
 export const getAllClients = async ( req, res ) => {
-   return res.json('get all clients');
+   try {
+      const clients = await ClientModel.find();
+      return res.status(httpStatus.OK).json({ clients });
+   }
+   catch (err) {
+      res.status(httpStatus.INTERNAL_SERVER_ERROR).json({
+         message: err.message
+      });
+   }
 };
 
 export const getClient = async ( req, res ) => {
-   return res.json('get client');
+   try {
+      const client = await ClientModel.findById(req.params.id);
+      return res.status(httpStatus.OK).json({ client });
+   }
+   catch (err) {
+      res.status(httpStatus.INTERNAL_SERVER_ERROR).json({
+         message: err.message
+      });
+   }
 };
 
 export const updateClient = async ( req, res ) => {
