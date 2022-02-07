@@ -10,6 +10,7 @@ const invoiceSchema = new Schema({
   tax: { type: Number, required: true },
   date: { type: Date, required: true },
   dueDate: { type: Date, required: true },
+  client: { type: Schema.Types.ObjectId, ref: 'Client', required: true },
 }, { timestamps: true });
 
 invoiceSchema.plugin(mongoosePaginate);

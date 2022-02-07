@@ -231,15 +231,15 @@
    },
    "definitions": {
       "Invoice": {
-         "required": [ "item", "quantity", "amount", "tax", "date", "dueDate" ],
+         "required": [ "item", "quantity", "amount", "tax", "date", "dueDate", "client" ],
          "properties": {
-            "_id": { "type": "string", "uniqueItems": true },
             "item": { "type": "string" },
             "quantity": { "type": "integer", "format": "int32" },
             "amount": { "type": "number", "format": "double" },
             "tax": { "type": "number", "format": "double" },
             "date": { "type": "string", "format": "date" },
-            "dueDate": { "type": "string", "format": "date" }
+            "dueDate": { "type": "string", "format": "date" },
+            "client": { "type": "string" }
          }
       },
       "Invoices": {
@@ -269,7 +269,8 @@
             "amount": { "type": "number", "format": "double" },
             "tax": { "type": "number", "format": "double" },
             "date": { "type": "string", "format": "date" },
-            "dueDate": { "type": "string", "format": "date" }
+            "dueDate": { "type": "string", "format": "date" },
+            "client": { "type": "string" }
          }
       },
       "ErrorModel": {

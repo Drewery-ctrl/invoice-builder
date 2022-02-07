@@ -48,24 +48,24 @@ export const getClient = async ( req, res ) => {
 };
 
 export const updateClient = async ( req, res ) => {
-  try {
-     const { error, value } = clientService.validateUpdateSchema(req.body);
-     if (error && error.details) {
-        return res.status(httpStatus.BAD_REQUEST).json(error.details[0].message);
-     }
-     const client = await ClientModel.findByIdAndUpdate(req.params.id, value, { new: true });
-     if (!client) {
-        return res.status(httpStatus.NOT_FOUND).json({
-           message: 'update error: client not found'
-        });
-     }
-     return res.status(httpStatus.OK).json({ client });
-  }
-  catch (err) {
-     res.status(httpStatus.INTERNAL_SERVER_ERROR).json({
-        message: err.message
-     });
-  }
+   try {
+      const { error, value } = clientService.validateUpdateSchema(req.body);
+      if (error && error.details) {
+         return res.status(httpStatus.BAD_REQUEST).json(error.details[0].message);
+      }
+      const client = await ClientModel.findByIdAndUpdate(req.params.id, value, { new: true });
+      if (!client) {
+         return res.status(httpStatus.NOT_FOUND).json({
+            message: 'update error: client not found'
+         });
+      }
+      return res.status(httpStatus.OK).json({ client });
+   }
+   catch (err) {
+      res.status(httpStatus.INTERNAL_SERVER_ERROR).json({
+         message: err.message
+      });
+   }
 };
 
 export const deleteClient = async ( req, res ) => {
