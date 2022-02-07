@@ -1,0 +1,11 @@
+### Create New Client
+POST /api/v1/clients HTTP/1.1
+Host: localhost:3001
+Content-Type: application/json
+
+{
+   "firstName": "Jerry",
+   "lastName": "Johnson",
+   "email": "jerry@gmail.com",
+   "phone": "1234567890"
+}
