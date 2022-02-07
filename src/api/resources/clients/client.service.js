@@ -13,3 +13,17 @@ export const validateCreateSchema = ( body ) => {
    }
    return { value };
 }
+
+export const validateUpdateSchema = ( body ) => {
+   const clientSchema = Joi.object().keys({
+      firstName: Joi.string().optional(),
+      lastName: Joi.string().optional(),
+      email: Joi.string().email().optional(),
+      phone: Joi.string().regex(/^[0-9]{10}$/).messages({ 'string.pattern.base': `Phone number must have 10 digits.` }).optional(),
+   });
+   const { error, value } = clientSchema.validate(body, { abortEarly: false });
+   if (error && error.details) {
+      return { error }
+   }
+   return { value };
+}

@@ -1,12 +1,12 @@
-### Create New Client
+### Create Client
 POST /api/v1/clients HTTP/1.1
 Host: localhost:3001
 Content-Type: application/json
 
 {
-   "firstName": "Nico",
-   "lastName": "Orgaseen",
-   "email": "nico@gmail.com",
+   "firstName": "Martial",
+   "lastName": "Mathers",
+   "email": "eminem@gmail.com",
    "phone": "1234567890"
 }
 
@@ -17,5 +17,23 @@ Content-Type: application/json
 
 ### Get Client By ID
 GET /api/v1/clients/62019b67da963a8c843e1720 HTTP/1.1
+Host: localhost:3001
+Content-Type: application/json
+
+
+### Update Client
+PUT /api/v1/clients/62019a32783124a71a036a1f HTTP/1.1
+Host: localhost:3001
+Content-Type: application/json
+
+{
+   "firstName": "Tom",
+   "lastName": "Brady",
+   "email": "goat@gmail.com",
+   "phone": "6154567890"
+}
+
+### Delete Client
+DELETE /api/v1/clients/62019de52f3b20bb4da3bd2e HTTP/1.1
 Host: localhost:3001
 Content-Type: application/json

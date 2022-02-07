@@ -4,8 +4,10 @@ import * as clientController from './client.controller';
 export const clientRouter = express.Router();
 
 clientRouter.route('/')
-.get(clientController.getAllClients)
-.post(clientController.createClient);
+   .get(clientController.getAllClients)
+   .post(clientController.createClient);
 
 clientRouter.route('/:id')
-.get(clientController.getClient)
+   .get(clientController.getClient)
+   .put(clientController.updateClient)
+   .delete(clientController.deleteClient);
