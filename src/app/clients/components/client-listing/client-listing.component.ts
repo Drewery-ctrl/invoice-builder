@@ -2,6 +2,8 @@ import {Component, OnInit} from '@angular/core';
 import {ClientService} from '../../services/client.service';
 import {MatTableDataSource} from "@angular/material/table";
 import {Client} from '../../models/client';
+import {MatDialog} from '@angular/material/dialog';
+import {ClientFormDialog} from '../client-form-dialog.component';
 
 @Component({
    selector: 'app-client-listing',
@@ -11,8 +13,10 @@ import {Client} from '../../models/client';
 export class ClientListingComponent implements OnInit {
    displayedColumns = ['firstName', 'lastName', 'email', 'phone'];
    dataSource = new MatTableDataSource<Client>();
+   animal: string;
+   name: string;
 
-   constructor(private clientService: ClientService) {
+   constructor(private clientService: ClientService, public dialog: MatDialog) {
    }
 
    ngOnInit(): void {
@@ -33,5 +37,17 @@ export class ClientListingComponent implements OnInit {
 
    createClientHandler() {
 
+   }
+
+   openDialog(): void {
+      const dialogRef = this.dialog.open(ClientFormDialog, {
+         width: '250px',
+         data: {name: this.name, animal: this.animal},
+      });
+
+      dialogRef.afterClosed().subscribe(result => {
+         console.log('The dialog was closed');
+         this.animal = result;
+      });
    }
 }

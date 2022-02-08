@@ -1,11 +1,13 @@
 .invoice-table {
    width: 80%;
+   height: 100%;
+   margin: 0 auto;
 }
 
 .invoice-table-container {
    display: flex;
    flex-direction: column;
-   max-height: 650px;
+   max-height: 700px;
    min-width: 300px;
    position: relative;
 }
@@ -15,20 +17,9 @@
    max-height: 500px;
 }
 
-.mat-column-demo-position {
-   width: 32px;
-   border-right: 1px solid currentColor;
+.mat-column-ITEM {
+   width: 340px;
    padding-right: 24px;
-   text-align: center;
-}
-
-.mat-column-demo-name {
-   padding-left: 16px;
-   font-size: 20px;
-}
-
-.mat-column-demo-weight {
-   font-style: italic;
 }
 
 .mat-column-demo-symbol {
@@ -46,7 +37,6 @@
 .menu-bar {
    display: flex;
    justify-content: space-between;
-
 }
 
 .action-button {
