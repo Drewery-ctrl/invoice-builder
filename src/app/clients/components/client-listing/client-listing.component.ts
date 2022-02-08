@@ -58,11 +58,7 @@ export class ClientListingComponent implements OnInit {
       dialogRef.afterClosed().pipe(
          filter(clientParams => typeof clientParams !== 'undefined'),
          mergeMap(result => {
-            if (clientId) {
-               return this.clientService.updateClient(clientId, result);
-            } else {
-               return this.clientService.createClient(result);
-            }
+            return clientId ? this.clientService.updateClient(clientId, result) : this.clientService.createClient(result)
          })
       ).subscribe({
          next: ({client}) => {
