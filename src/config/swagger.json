@@ -24,6 +24,14 @@
    "schemes": [ "http" ],
    "consumes": [ "application/json" ],
    "produces": [ "application/json" ],
+   "securityDefinitions": {
+      "Bearer": {
+         "type": "apiKey",
+         "name": "Authorization",
+         "in": "header"
+      }
+   },
+
    "paths": {
       "/users/signup": {
          "post": {
@@ -94,7 +102,17 @@
             "tags": [ "Clients" ],
             "summary": "Get all clients",
             "description": "Get all clients",
+            "security": [{"Bearer": []}],
             "operationId": "getClients",
+            "parameters": [
+               {
+                  "name": "Authorization",
+                  "in": "header",
+                  "description": "Authorization token",
+                  "required": false,
+                  "type": "string"
+               }
+            ],
             "responses": {
                "200": {
                   "description": "An array of clients",
@@ -112,15 +130,23 @@
             "summary": "Create a client",
             "description": "Create a client",
             "operationId": "createClient",
+            "security": [{"Bearer": []}],
             "parameters": [
                {
                   "name": "body",
                   "in": "body",
-                  "description": "Client to add to the invoices",
+                  "description": "Client to add for invoices ledger",
                   "required": true,
                   "schema": {
                      "$ref": "#/definitions/Client"
                   }
+               },
+               {
+                  "name": "Authorization",
+                  "in": "header",
+                  "description": "JWT access token to authorize user",
+                  "required": false,
+                  "type": "string"
                }
             ],
             "responses": {
@@ -138,6 +164,7 @@
             "tags": [ "Clients" ],
             "summary": "Get a client by its id",
             "description": "Get a client by its id",
+            "security": [{"Bearer": []}],
             "operationId": "getClientById",
             "parameters": [
                {
@@ -145,6 +172,13 @@
                   "in": "path",
                   "description": "ID of client to return",
                   "required": true,
+                  "type": "string"
+               },
+               {
+                  "name": "Authorization",
+                  "in": "header",
+                  "description": "JWT access token to authorize user",
+                  "required": false,
                   "type": "string"
                }
             ],
@@ -161,6 +195,7 @@
             "tags": [ "Clients" ],
             "summary": "Update a client",
             "description": "Update a client",
+            "security": [{"Bearer": []}],
             "operationId": "updateClient",
             "parameters": [
                {
@@ -178,6 +213,13 @@
                   "schema": {
                      "$ref": "#/definitions/UpdateClient"
                   }
+               },
+               {
+                  "name": "Authorization",
+                  "in": "header",
+                  "description": "JWT access token to authorize user",
+                  "required": false,
+                  "type": "string"
                }
             ],
             "responses": {
@@ -190,6 +232,7 @@
             "tags": [ "Clients" ],
             "summary": "Delete a client",
             "description": "Delete a client",
+            "security": [{"Bearer": []}],
             "operationId": "deleteClient",
             "parameters": [
                {
@@ -197,6 +240,13 @@
                   "in": "path",
                   "description": "ID of client to delete",
                   "required": true,
+                  "type": "string"
+               },
+               {
+                  "name": "Authorization",
+                  "in": "header",
+                  "description": "JWT access token to authorize user",
+                  "required": false,
                   "type": "string"
                }
             ],
@@ -211,6 +261,7 @@
          "get": {
             "tags": [ "Invoices" ],
             "summary": "Retrieve all invoices from database",
+            "security": [{"Bearer": []}],
             "description": "Returns all invoices from the database that the user has access to",
             "operationId": "findAllInvoices",
             "produces": [ "application/json" ],
@@ -251,6 +302,13 @@
                   "description": "define what direction to sort by - asc or desc",
                   "required": false,
                   "type": "string"
+               },
+               {
+                  "name": "Authorization",
+                  "in": "header",
+                  "description": "JWT access token to authorize user",
+                  "required": false,
+                  "type": "string"
                }
             ],
             "responses": {
@@ -274,6 +332,7 @@
          "post": {
             "tags": [ "Invoices" ],
             "summary": "Create a new invoice",
+            "security": [{"Bearer": []}],
             "description": "Creates a new Invoice. Duplicates aren't allowed",
             "operationId": "createInvoice",
             "produces": [
@@ -288,6 +347,13 @@
                   "schema": {
                      "$ref": "#/definitions/Invoice"
                   }
+               },
+               {
+                  "name": "Authorization",
+                  "in": "header",
+                  "description": "JWT access token to authorize user",
+                  "required": false,
+                  "type": "string"
                }
             ],
             "responses": {
@@ -310,6 +376,7 @@
          "get": {
             "tags": [ "Invoices" ],
             "summary": "Retrieve a single invoice by ID",
+            "security": [{"Bearer": []}],
             "description": "Returns a single Invoice based on it's ID",
             "operationId": "findInvoiceById",
             "produces": [
@@ -324,6 +391,13 @@
                   "in": "path",
                   "description": "ID of invoice to fetch",
                   "required": true,
+                  "type": "string"
+               },
+               {
+                  "name": "Authorization",
+                  "in": "header",
+                  "description": "JWT access token to authorize user",
+                  "required": false,
                   "type": "string"
                }
             ],
@@ -345,6 +419,7 @@
          "put": {
             "tags": [ "Invoices" ],
             "summary": "Update an existing invoice",
+            "security": [{"Bearer": []}],
             "description": "Updates an existing Invoice",
             "operationId": "updateInvoice",
             "produces": [ "application/json" ],
@@ -364,6 +439,13 @@
                   "schema": {
                      "$ref": "#/definitions/UpdateInvoice"
                   }
+               },
+               {
+                  "name": "Authorization",
+                  "in": "header",
+                  "description": "JWT access token to authorize user",
+                  "required": false,
+                  "type": "string"
                }
             ],
             "responses": {
@@ -384,6 +466,7 @@
          "delete": {
             "tags": [ "Invoices" ],
             "summary": "Delete an invoice",
+            "security": [{"Bearer": []}],
             "description": "Deletes a single Invoice based on the ID supplied",
             "operationId": "DeleteInvoice",
             "parameters": [
@@ -394,6 +477,13 @@
                   "required": true,
                   "type": "integer",
                   "format": "int64"
+               },
+               {
+                  "name": "Authorization",
+                  "in": "header",
+                  "description": "JWT access token to authorize user",
+                  "required": false,
+                  "type": "string"
                }
             ],
             "responses": {
@@ -434,10 +524,12 @@
          "properties": {
             "email": {
                "type": "string",
+               "example": "Danny@example.com",
                "format": "email"
             },
             "password": {
                "type": "string",
+               "example": "password12345",
                "minLength": 8
             }
          }
