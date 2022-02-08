@@ -6,6 +6,7 @@ import {MatDialog} from '@angular/material/dialog';
 import {MatSnackBar} from '@angular/material/snack-bar';
 import {filter, mergeMap} from 'rxjs/operators';
 import {FormDialogComponent} from '../form-dialog/form-dialog.component';
+import {remove} from "lodash";
 
 @Component({
    selector: 'app-client-listing',
@@ -83,13 +84,24 @@ export class ClientListingComponent implements OnInit {
       })
    }
 
+
+   async deleteClientHandler(id: string) {
+      await this.clientService.deleteClient(id).subscribe({
+         next: () => {
+            remove(this.dataSource.data, client => client._id === id);
+            this.dataSource.data = [...this.dataSource.data];
+            this._snackBar.open('Client deleted successfully', 'Success', {duration: 2000});
+         },
+         error: (err) => {
+            this.errorHandler(err, 'Error deleting client');
+         }
+      })
+   }
+
+
    private errorHandler(error: any, displayMessage: string) {
       this.isLoadingResults = false;
       console.log(error);
       this._snackBar.open(displayMessage, 'Error', {duration: 2000});
-   }
-
-   deleteClientHandler(_id: any) {
-
    }
 }
