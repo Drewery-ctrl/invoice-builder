@@ -1,5 +1,6 @@
 import * as clientService from './client.service';
 import httpStatus from 'http-status-codes';
+import HttpStatus from 'http-status-codes';
 import ClientModel from './client.model';
 
 export const createClient = async ( req, res ) => {
@@ -21,7 +22,9 @@ export const createClient = async ( req, res ) => {
 export const getAllClients = async ( req, res ) => {
    try {
       const clients = await ClientModel.find();
-      return res.status(httpStatus.OK).json({ clients });
+      setTimeout(() => {
+         res.status(HttpStatus.OK).json(clients);
+      }, 500);
    }
    catch (err) {
       res.status(httpStatus.INTERNAL_SERVER_ERROR).json({
