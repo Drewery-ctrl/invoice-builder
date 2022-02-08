@@ -1,0 +1,24 @@
+.invoice-table-container {
+   display: flex;
+   flex-direction: column;
+   max-height: 580px;
+   min-width: 300px;
+   position: relative;
+}
+
+.invoice-table {
+   width: 65%;
+}
+
+
+.mat-table {
+   overflow: auto;
+   max-height: 500px;
+}
+
+.mat-column-firstName, .mat-column-lastName, .mat-column-email, .mat-column-phone  {
+   width: 32px;
+   padding-right: 24px;
+   text-align: center;
+}
+

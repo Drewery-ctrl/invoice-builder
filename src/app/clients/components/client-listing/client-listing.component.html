@@ -1,3 +1,31 @@
-<mat-card>
-   <h2>Client Listing</h2>
-</mat-card>
+<div class='invoice-table-container mat-elevation-z8 invoice-table'>
+   <table mat-table [dataSource]="dataSource" #table>
+
+      <!-- Position Column -->
+      <ng-container matColumnDef="firstName">
+         <th mat-header-cell *matHeaderCellDef> FirstName</th>
+         <td mat-cell *matCellDef="let client"> {{client.firstName}} </td>
+      </ng-container>
+
+      <!-- Name Column -->
+      <ng-container matColumnDef="lastName">
+         <th mat-header-cell *matHeaderCellDef> LastName</th>
+         <td mat-cell *matCellDef="let client"> {{client.lastName}} </td>
+      </ng-container>
+
+      <!-- Weight Column -->
+      <ng-container matColumnDef="email">
+         <th mat-header-cell *matHeaderCellDef> Email</th>
+         <td mat-cell *matCellDef="let client"> {{client.email}} </td>
+      </ng-container>
+
+      <!-- Symbol Column -->
+      <ng-container matColumnDef="phone">
+         <th mat-header-cell *matHeaderCellDef> Phone Number</th>
+         <td mat-cell *matCellDef="let client"> {{client.phone}} </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+   </table>
+</div>
