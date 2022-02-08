@@ -8,12 +8,13 @@ Host: localhost:3001
 Content-Type: application/json
 
 {
-  "item": "Contract Project Budget",
+  "item": "Azure & AWS Cloud Infrastructure Budget",
   "quantity": 2,
-  "amount": 200.00,
-  "tax": 2.00,
+  "amount": 2200.00,
+  "tax": 29.52,
   "date": "2020-01-01",
-  "dueDate": "2020-03-01"
+  "dueDate": "2022-03-01",
+   "client": "62019a32783124a71a036a1f"
 }
 
 ### Get Invoice by ID

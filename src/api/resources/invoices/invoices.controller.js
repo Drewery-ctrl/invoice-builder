@@ -7,7 +7,8 @@ export const findAllInvoices = async ( req, res ) => {
       const { page = 1, perPage = 10, filter, sortField, sortDir } = req.query;
       const options = {
          page: parseInt(page, 10),
-         limit: parseInt(perPage, 10)
+         limit: parseInt(perPage, 10),
+         populate: 'client',
       };
       const query = {};
       if (filter) {
@@ -74,6 +75,7 @@ export const updateInvoice = async ( req, res ) => {
          tax: Joi.number().optional(),
          date: Joi.date().optional(),
          dueDate: Joi.date().optional(),
+         client: Joi.string().optional(),
       });
 
       const { error, value } = schema.validate(req.body);
