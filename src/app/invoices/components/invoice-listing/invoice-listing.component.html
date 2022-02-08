@@ -1,19 +1,20 @@
-<mat-toolbar class='menu-bar'>
-   <span>Invoices</span>
-
-   <mat-form-field class="search-bar" appearance="legacy" color="accent">
-      <input matInput (keyup)='applyFilter($event)' placeholder='search...'>
-   </mat-form-field>
-
-   <!--   <span class='flex-spacer'></span>-->
-   <button mat-button (click)='createInvoiceHandler()' class='action-button'>
-      <mat-icon>add</mat-icon>
-      <span>Add Invoice</span>
-   </button>
-</mat-toolbar>
-
-
 <div class='invoice-table-container mat-elevation-z8 invoice-table'>
+   <!--   Material ToolBar -->
+   <mat-toolbar class='menu-bar'>
+      <span>Invoices</span>
+
+      <mat-form-field class="search-bar" appearance="legacy" color="accent">
+         <input matInput (keyup)='applyFilter($event)' placeholder='search...'>
+      </mat-form-field>
+
+      <!--   <span class='flex-spacer'></span>-->
+      <button mat-button (click)='createInvoiceHandler()' class='action-button'>
+         <mat-icon>add</mat-icon>
+         <span>Add Invoice</span>
+      </button>
+   </mat-toolbar>
+
+
    <!-- Material Progress Spinner -->
    <div class="mat-elevation-z8">
       <div class="loading-shade" *ngIf="isLoadingResults">

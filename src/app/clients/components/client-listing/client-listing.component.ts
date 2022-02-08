@@ -27,4 +27,11 @@ export class ClientListingComponent implements OnInit {
       })
    }
 
+   applyFilter($event: KeyboardEvent) {
+
+   }
+
+   createClientHandler() {
+
+   }
 }

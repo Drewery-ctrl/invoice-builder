@@ -14,6 +14,6 @@ export class ClientService {
    }
 
    getAllClients(): Observable<{ clients: Client[] }> {
-      return this.httpClient.get<{clients: Client[]}>(`${BASE_URL}/clients`);
+      return this.httpClient.get<{ clients: Client[] }>(`${BASE_URL}/clients`);
    }
 }
