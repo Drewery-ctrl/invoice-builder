@@ -1,13 +1,14 @@
 import express from 'express';
 import * as invoicesController from "./invoices.controller";
+import passport from "passport";
 
 export const invoiceRouter = express.Router();
 
 invoiceRouter.route('/')
-   .get(invoicesController.findAllInvoices)
-   .post(invoicesController.createInvoice);
+   .get(passport.authenticate('jwt', { session: false }), invoicesController.findAllInvoices)
+   .post(passport.authenticate('jwt', { session: false }), invoicesController.createInvoice);
 
 invoiceRouter.route('/:id')
-   .get(invoicesController.findInvoiceById)
-   .put(invoicesController.updateInvoice)
-   .delete(invoicesController.deleteInvoice);
+   .get(passport.authenticate('jwt', { session: false }), invoicesController.findInvoiceById)
+   .put(passport.authenticate('jwt', { session: false }), invoicesController.updateInvoice)
+   .delete(passport.authenticate('jwt', { session: false }), invoicesController.deleteInvoice);

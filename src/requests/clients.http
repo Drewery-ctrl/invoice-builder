@@ -14,6 +14,7 @@ Content-Type: application/json
 GET /api/v1/clients HTTP/1.1
 Host: localhost:3001
 Content-Type: application/json
+Authorization: Bearer {{auth_token}}
 
 ### Get Client By ID
 GET /api/v1/clients/62019b67da963a8c843e1720 HTTP/1.1

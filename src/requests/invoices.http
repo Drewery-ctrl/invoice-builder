@@ -1,6 +1,7 @@
 ### Get all Invoices
 GET /api/v1/invoices HTTP/1.1
 Host: localhost:3001
+Authorization: Bearer {{auth_token}}
 
 ### Create new Invoice
 POST /api/v1/invoices HTTP/1.1
@@ -20,6 +21,7 @@ Content-Type: application/json
 ### Get Invoice by ID
 GET /api/v1/invoices/61fc79b686c2a60e1b0f8ca3 HTTP/1.1
 Host: localhost:3001
+Authorization: Bearer {{auth_token}}
 
 
 ### Update Invoice by ID
