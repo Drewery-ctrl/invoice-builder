@@ -13,8 +13,8 @@ export class ClientService {
    constructor(private httpClient: HttpClient) {
    }
 
-   getAllClients(): Observable<{ clients: Client[] }> {
-      return this.httpClient.get<{ clients: Client[] }>(`${BASE_URL}/clients`);
+   getAllClients(): Observable< Client[] > {
+      return this.httpClient.get< Client[] >(`${BASE_URL}/clients`);
    }
 
    getClientById(id: string): Observable<{ client: Client }> {

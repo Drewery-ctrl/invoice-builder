@@ -14,6 +14,7 @@ import {filter, mergeMap} from 'rxjs/operators';
 })
 export class ClientListingComponent implements OnInit {
    displayedColumns = ['firstName', 'lastName', 'email', 'phone'];
+   isLoadingResults = false;
    dataSource = new MatTableDataSource<Client>();
    animal: string;
    name: string;
@@ -22,18 +23,21 @@ export class ClientListingComponent implements OnInit {
    }
 
    ngOnInit() {
+      this.isLoadingResults = true;
       this.clientService.getAllClients().subscribe({
          next: (data) => {
-            this.dataSource.data = data.clients;
+            this.dataSource.data = data;
          },
          error: (err) => {
             this.errorHandler(err, 'Error while getting clients');
+         },
+         complete: () => {
+            this.isLoadingResults = false;
          }
       })
    }
 
    applyFilter($event: KeyboardEvent) {
-
    }
 
    openDialog(): void {
