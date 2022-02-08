@@ -1,0 +1,62 @@
+.form-container {
+   display: flex;
+   flex-direction: column;
+}
+
+.form-container > * {
+   width: 100%;
+}
+
+.mat-card {
+   position: absolute;
+   width: 450px;
+   height: 400px;
+   z-index: 10;
+   top: 30%;
+   left: 48%;
+   margin: -100px 0 0 -150px;
+}
+
+.mat-card-content > * {
+   display: flex;
+   padding: 10px;
+   flex-direction: column;
+
+   .authButton{
+      margin-top: 2rem;
+   }
+}
+
+.alternative {
+   margin-top: 40px;
+   padding-top: 40px;
+   text-align: center;
+   border-top: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+
+.limiter {
+   width: 100%;
+   margin: 0 auto;
+}
+
+
+.container-login {
+   width: 100%;
+   min-height: 100vh;
+   display: -webkit-box;
+   display: -webkit-flex;
+   display: -moz-box;
+   display: -ms-flexbox;
+   display: flex;
+   flex-wrap: wrap;
+   justify-content: center;
+   align-items: center;
+   padding: 15px;
+   background: #f2f2f2;
+   // background: yellow;
+}
+
+.mat-card > .mat-card-title {
+   color: #dd548d;
+}
