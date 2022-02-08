@@ -3,18 +3,22 @@ import {CommonModule} from '@angular/common';
 import {ClientListingComponent} from './components/client-listing/client-listing.component';
 import {MaterialModule} from "../shared/material.module";
 import {FormsModule} from '@angular/forms';
+import {HttpClientModule} from '@angular/common/http';
+import {ClientService} from "./services/client.service";
 
 
 @NgModule({
    declarations: [
-      ClientListingComponent
+      ClientListingComponent,
    ],
    imports: [
       CommonModule,
       FormsModule,
-      MaterialModule
+      MaterialModule,
+      HttpClientModule,
    ],
-   exports: [ClientListingComponent]
+   exports: [ClientListingComponent],
+   providers: [ClientService],
 })
 export class ClientsModule {
 }
