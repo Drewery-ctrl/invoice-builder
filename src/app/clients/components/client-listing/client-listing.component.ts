@@ -5,7 +5,7 @@ import {Client} from '../../models/client';
 import {MatDialog} from '@angular/material/dialog';
 import {FormDialogComponent} from '../form-dialog/form-dialog.component';
 import {MatSnackBar} from '@angular/material/snack-bar';
-import {mergeMap} from 'rxjs/operators';
+import {filter, mergeMap} from 'rxjs/operators';
 
 @Component({
    selector: 'app-client-listing',
@@ -25,10 +25,9 @@ export class ClientListingComponent implements OnInit {
       this.clientService.getAllClients().subscribe({
          next: (data) => {
             this.dataSource.data = data.clients;
-            console.log(data);
          },
          error: (err) => {
-            console.log(err);
+            this.errorHandler(err, 'Error while getting clients');
          }
       })
    }
@@ -44,6 +43,7 @@ export class ClientListingComponent implements OnInit {
       });
 
       dialogRef.afterClosed().pipe(
+         filter(clientParams => typeof clientParams !== 'undefined'),
          mergeMap(result => this.clientService.createClient(result))
       ).subscribe({
          next: (data) => {
