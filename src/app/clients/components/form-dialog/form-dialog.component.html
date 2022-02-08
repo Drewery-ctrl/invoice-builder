@@ -1,5 +1,8 @@
 <div mat-dialog-content>
-   <h1 mat-dialog-title>Create New Client</h1>
+   <mat-card-header>
+      <h2 *ngIf="!isEditMode">Create Client</h2>
+      <h2 *ngIf="isEditMode">Update Client</h2>
+   </mat-card-header>
 
    <form class="form-container" [formGroup]="clientForm">
       <!-- first name-->
@@ -27,7 +30,10 @@
       </mat-form-field>
    </form>
 </div>
-<div mat-dialog-actions>
+<div mat-dialog-actions class="form-group" style="display: flex; justify-content: space-between; margin-bottom: 8px;">
    <button mat-button mat-raised-button (click)="onNoClick()">Cancel</button>
-   <button mat-button mat-raised-button [mat-dialog-close]="clientForm.value" color="accent" cdkFocusInitial>Save</button>
+   <button mat-button mat-raised-button [mat-dialog-close]="clientForm.value" color="accent" [disabled]="!clientForm.valid">
+      <span *ngIf="!isEditMode">Create Client</span>
+      <span *ngIf="isEditMode">Update Client</span>
+   </button>
 </div>

@@ -3,9 +3,9 @@ import {ClientService} from '../../services/client.service';
 import {MatTableDataSource} from "@angular/material/table";
 import {Client} from '../../models/client';
 import {MatDialog} from '@angular/material/dialog';
-import {FormDialogComponent} from '../form-dialog/form-dialog.component';
 import {MatSnackBar} from '@angular/material/snack-bar';
 import {filter, mergeMap} from 'rxjs/operators';
+import {FormDialogComponent} from '../form-dialog/form-dialog.component';
 
 @Component({
    selector: 'app-client-listing',
@@ -13,13 +13,16 @@ import {filter, mergeMap} from 'rxjs/operators';
    styleUrls: ['./client-listing.component.scss']
 })
 export class ClientListingComponent implements OnInit {
-   displayedColumns = ['firstName', 'lastName', 'email', 'phone'];
+   displayedColumns = ['firstName', 'lastName', 'email', 'phone', 'actions'];
    isLoadingResults = false;
    dataSource = new MatTableDataSource<Client>();
    animal: string;
    name: string;
 
-   constructor(private clientService: ClientService, public dialog: MatDialog, private _snackBar: MatSnackBar) {
+   constructor(
+      private clientService: ClientService,
+      public dialog: MatDialog,
+      private _snackBar: MatSnackBar) {
    }
 
    ngOnInit() {
@@ -40,12 +43,17 @@ export class ClientListingComponent implements OnInit {
    applyFilter($event: KeyboardEvent) {
    }
 
-   openDialog(): void {
-      const dialogRef = this.dialog.open(FormDialogComponent, {
+   openDialog(clientId?: string): void {
+      let options = {
          width: '600px',
-         height: '450px'
-      });
+         height: '500px',
+         data: {}
+      }
 
+      if (clientId) {
+         options.data = {clientId: clientId}
+      }
+      let dialogRef = this.dialog.open(FormDialogComponent, options);
       dialogRef.afterClosed().pipe(
          filter(clientParams => typeof clientParams !== 'undefined'),
          mergeMap(result => this.clientService.createClient(result))
@@ -61,8 +69,16 @@ export class ClientListingComponent implements OnInit {
    }
 
    private errorHandler(error: any, displayMessage: string) {
-      // this.isLoadingResults = false;
+      this.isLoadingResults = false;
       console.log(error);
       this._snackBar.open(displayMessage, 'Error', {duration: 2000});
+   }
+
+   editClientHandler(_id: any) {
+
+   }
+
+   deleteClientHandler(_id: any) {
+
    }
 }
