@@ -7,7 +7,7 @@
       </mat-form-field>
 
       <!--   <span class='flex-spacer'></span>-->
-      <button mat-button (click)='createClientHandler()' class='action-button'>
+      <button mat-button mat-raised-button (click)='openDialog()' class='action-button'>
          <mat-icon>add</mat-icon>
          <span>Add Client</span>
       </button>
@@ -43,18 +43,3 @@
       <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
    </table>
 </div>
-
-<ol>
-   <li>
-      <mat-form-field appearance="fill">
-         <mat-label>What's your name?</mat-label>
-         <input matInput [(ngModel)]="name">
-      </mat-form-field>
-   </li>
-   <li>
-      <button mat-raised-button (click)="openDialog()">Pick one</button>
-   </li>
-   <li *ngIf="animal">
-      You chose: <i>{{animal}}</i>
-   </li>
-</ol>

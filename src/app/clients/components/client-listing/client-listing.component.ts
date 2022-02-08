@@ -41,8 +41,8 @@ export class ClientListingComponent implements OnInit {
 
    openDialog(): void {
       const dialogRef = this.dialog.open(FormDialogComponent, {
-         width: '500px',
-         height: '350px',
+         width: '600px',
+         height: '450px',
          data: {name: this.name, animal: this.animal},
       });
 

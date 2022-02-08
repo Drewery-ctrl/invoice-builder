@@ -18,6 +18,7 @@
          <mat-label>Amount</mat-label>
          <input matInput placeholder="budget amount" formControlName="amount">
          <mat-icon matSuffix>paid</mat-icon>
+         <mat-error *ngIf="invoiceForm.controls['amount'].invalid && invoiceForm.controls['amount'].touched">amount is required</mat-error>
       </mat-form-field>
 
       <mat-form-field color="accent">
