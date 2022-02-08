@@ -4,6 +4,8 @@ import {MatTableDataSource} from "@angular/material/table";
 import {Client} from '../../models/client';
 import {MatDialog} from '@angular/material/dialog';
 import {FormDialogComponent} from '../form-dialog/form-dialog.component';
+import {MatSnackBar} from '@angular/material/snack-bar';
+import {mergeMap} from 'rxjs/operators';
 
 @Component({
    selector: 'app-client-listing',
@@ -16,10 +18,10 @@ export class ClientListingComponent implements OnInit {
    animal: string;
    name: string;
 
-   constructor(private clientService: ClientService, public dialog: MatDialog) {
+   constructor(private clientService: ClientService, public dialog: MatDialog, private _snackBar: MatSnackBar) {
    }
 
-   ngOnInit(): void {
+   ngOnInit() {
       this.clientService.getAllClients().subscribe({
          next: (data) => {
             this.dataSource.data = data.clients;
@@ -35,20 +37,28 @@ export class ClientListingComponent implements OnInit {
 
    }
 
-   createClientHandler() {
-
-   }
-
    openDialog(): void {
       const dialogRef = this.dialog.open(FormDialogComponent, {
          width: '600px',
-         height: '450px',
-         data: {name: this.name, animal: this.animal},
+         height: '450px'
       });
 
-      dialogRef.afterClosed().subscribe(result => {
-         console.log('The dialog was closed');
-         this.animal = result;
-      });
+      dialogRef.afterClosed().pipe(
+         mergeMap(result => this.clientService.createClient(result))
+      ).subscribe({
+         next: (data) => {
+            this.dataSource.data = [...this.dataSource.data, data.client];
+            this._snackBar.open('Client created successfully', 'Success', {duration: 2000});
+         },
+         error: (err) => {
+            this.errorHandler(err, 'Error creating client');
+         }
+      })
+   }
+
+   private errorHandler(error: any, displayMessage: string) {
+      // this.isLoadingResults = false;
+      console.log(error);
+      this._snackBar.open(displayMessage, 'Error', {duration: 2000});
    }
 }
