@@ -1,7 +1,7 @@
 import {Component, Inject, OnInit} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
-import {ActivatedRoute, Router} from "@angular/router";
+import {Router} from "@angular/router";
 import {ClientService} from '../../services/client.service';
 import {MatSnackBar} from '@angular/material/snack-bar';
 
@@ -21,8 +21,7 @@ export class FormDialogComponent implements OnInit {
       private fb: FormBuilder,
       private router: Router,
       private clientService: ClientService,
-      private _snackBar: MatSnackBar,
-      private route: ActivatedRoute
+      private _snackBar: MatSnackBar
    ) {
    }
 
@@ -37,7 +36,6 @@ export class FormDialogComponent implements OnInit {
          this.displayClientOnForm(this.data.clientId);
       }
    }
-
 
 
    private displayClientOnForm(clientId: string) {

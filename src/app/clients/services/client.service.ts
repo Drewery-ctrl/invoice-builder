@@ -25,8 +25,8 @@ export class ClientService {
       return this.httpClient.post<{ client: Client }>(`${BASE_URL}/clients`, client);
    }
 
-   updateClient(client: Client): Observable<{ client: Client }> {
-      return this.httpClient.put<{ client: Client }>(`${BASE_URL}/clients/${client._id}`, client);
+   updateClient(id: string, client: Client): Observable<{ client: Client }> {
+      return this.httpClient.put<{ client: Client }>(`${BASE_URL}/clients/${id}`, client);
    }
 
    deleteClient(id: string): Observable<{ client: Client }> {
