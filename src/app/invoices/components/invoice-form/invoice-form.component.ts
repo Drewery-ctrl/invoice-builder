@@ -4,7 +4,8 @@ import {InvoiceService} from '../../services/invoice.service';
 import {MatSnackBar} from "@angular/material/snack-bar";
 import {ActivatedRoute, Router} from "@angular/router";
 import {Invoice} from '../../models/invoice';
-
+import {ClientService} from 'src/app/clients/services/client.service';
+import {Client} from 'src/app/clients/models/client';
 
 @Component({
    selector: 'app-invoice-form',
@@ -12,6 +13,7 @@ import {Invoice} from '../../models/invoice';
    styleUrls: ['./invoice-form.component.scss']
 })
 export class InvoiceFormComponent implements OnInit {
+   clients: Client[] = [];
    routeId: string | null;
    private invoice: Invoice;
    isEditMode: boolean;
@@ -22,7 +24,8 @@ export class InvoiceFormComponent implements OnInit {
       private invoiceService: InvoiceService,
       private _snackBar: MatSnackBar,
       private router: Router,
-      private route: ActivatedRoute) {
+      private route: ActivatedRoute,
+      private clientService: ClientService) {
    }
 
    ngOnInit() {
@@ -30,6 +33,7 @@ export class InvoiceFormComponent implements OnInit {
       this.isEditMode = !!this.routeId;
       this.createForm();
       this.displayInvoiceOnForm();
+      this.setClients();
    }
 
    private displayInvoiceOnForm() {
@@ -51,13 +55,13 @@ export class InvoiceFormComponent implements OnInit {
          tax: '',
          date: ['', Validators.required],
          dueDate: ['', Validators.required],
+         client: ['', Validators.required],
       })
    }
 
    async onSubmit() {
       if (this.invoice) { // means user wants to update form
-         const id = this.route.snapshot.paramMap.get('id');
-         this.invoiceService.updateInvoice(id, this.invoiceForm.value).subscribe(async invoice => {
+         this.invoiceService.updateInvoice(this.routeId, this.invoiceForm.value).subscribe(async invoice => {
             this._snackBar.open('Invoice updated', 'Success', {duration: 2000});
             await this.router.navigate(['dashboard', 'invoices']);
          }, error => {
@@ -90,5 +94,16 @@ export class InvoiceFormComponent implements OnInit {
    async onCancel() {
       this.invoiceForm.reset();
       await this.router.navigate(['dashboard', 'invoices']);
+   }
+
+   setClients() {
+      this.clientService.getAllClients().subscribe({
+         next: clients => {
+            this.clients = clients;
+         },
+         error: error => {
+            this.errorHandler(error, 'Failed to get clients');
+         }
+      });
    }
 }
