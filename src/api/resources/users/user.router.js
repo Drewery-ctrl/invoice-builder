@@ -7,4 +7,4 @@ export const userRouter = express.Router();
 userRouter.get('/', userController.getAllUsers);
 userRouter.post('/login', userController.login);
 userRouter.post('/signup', userController.signUp);
-userRouter.get('/test', passport.authenticate('jwt', { session: false }), userController.test);
+userRouter.post('/passport', passport.authenticate('jwt', { session: false }), userController.getLoggedInUser);

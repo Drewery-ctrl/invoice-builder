@@ -9,7 +9,7 @@ const app = express();
 const PORT = process.env.PORT || 3001;
 
 mongoose.Promise = global.Promise;
-mongoose.connect(`mongodb://localhost:27017/${ process.env.DATABASE }`).then(
+mongoose.connect(`mongodb://localhost/invoice-builder`).then(
    () => {
       console.log('Connected to MongoDB');
    },

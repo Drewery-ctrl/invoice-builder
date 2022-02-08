@@ -73,7 +73,7 @@ export const login = async ( req, res ) => {
    }
 };
 
-export const test = async ( req, res ) => {
+export const getLoggedInUser = async ( req, res ) => {
    try {
       return res.status(httpStatus.OK).json({ success: true, message: 'Test Successful', user: req.user });
    }
