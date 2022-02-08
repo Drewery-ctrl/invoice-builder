@@ -19,8 +19,8 @@ export const signUp = async ( req, res ) => {
             error: 'User already exists',
          });
       }
-      const newUser = await UserModel.create(value);
-      return res.status(httpStatus.CREATED).json(newUser);
+      await UserModel.create(value);
+      return res.status(httpStatus.CREATED).json({ success: true, message: 'User created successfully' });
    }
    catch (error) {
       console.log(error);

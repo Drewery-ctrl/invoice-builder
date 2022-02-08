@@ -18,12 +18,45 @@
    },
    "tags": [
       { "name": "Invoices", "description": "Operations about invoices" },
-      { "name": "Clients", "description": "Operations about clients" }
+      { "name": "Clients", "description": "Operations about clients" },
+      { "name": "Users", "description": "Operations about users" }
    ],
    "schemes": [ "http" ],
    "consumes": [ "application/json" ],
    "produces": [ "application/json" ],
    "paths": {
+      "/users/signup": {
+         "post": {
+            "tags": [ "Users" ],
+            "summary": "Signup a new user",
+            "description": "Signup a new user",
+            "operationId": "signup",
+            "consumes": [ "application/json" ],
+            "produces": [ "application/json" ],
+            "parameters": [
+               {
+                  "name": "body",
+                  "in": "body",
+                  "description": "User object that needs to be added to the store",
+                  "required": true,
+                  "schema": {
+                     "$ref": "#/definitions/User"
+                  }
+               }
+            ],
+            "responses": {
+               "200": {
+                  "description": "User signup successful",
+                  "schema": {
+                     "$ref": "#/definitions/User"
+                  }
+               },
+               "400": {
+                  "description": "Invalid user supplied"
+               }
+            }
+         }
+      },
       "/clients": {
          "get": {
             "tags": [ "Clients" ],
@@ -346,6 +379,19 @@
       }
    },
    "definitions": {
+      "User": {
+         "required": [ "name", "email" ],
+         "properties": {
+            "email": {
+               "type": "string",
+               "format": "email"
+            },
+            "password": {
+               "type": "string",
+               "minLength": 8
+            }
+         }
+      },
       "Client": {
          "required": [ "firstName", "lastName", "email", "phoneNumber" ],
          "properties": {
