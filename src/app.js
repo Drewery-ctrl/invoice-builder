@@ -1,3 +1,4 @@
+require('dotenv').config();
 import express from 'express';
 import mongoose from 'mongoose';
 import logger from 'morgan';
@@ -11,13 +12,13 @@ const PORT = process.env.PORT || 3001;
 
 app.use(express.json());
 app.use(cors());
-app.use(express.urlencoded({ extended: true }));
+app.use(express.urlencoded({ extended: true }))
 app.use(logger('dev'));
 app.use('/api-docs', swaggerUI.serve, swaggerUI.setup(swaggerDocument, { explorer: true }));
 app.use('/api/v1', restRouter);
 
 mongoose.Promise = global.Promise;
-mongoose.connect('mongodb://localhost/invoice-builder').then(
+mongoose.connect(`mongodb://localhost:27017/${process.env.DATABASE}`).then(
   () => {
     console.log('Connected to MongoDB');
   },
