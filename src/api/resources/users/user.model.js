@@ -15,7 +15,7 @@ UserSchema.pre('save', async function ( next ) {
    next();
 });
 
-
+// must always call method inside model.fineOne.. etc
 UserSchema.methods.comparePassword = async function ( candidatePassword ) {
    await bcryptjs.compare(candidatePassword, this.password, function ( err, isMatch ) {
       if (err) return err;
