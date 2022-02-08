@@ -4,7 +4,7 @@ import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
 @Component({
    selector: 'client-dialog-form',
    template: `
-      <h1 mat-dialog-title>Hi {{data.name}}</h1>
+      <h1 mat-dialog-title>Hi {{data.name}} client-form-dialog</h1>
       <div mat-dialog-content>
          <p>What's your favorite animal?</p>
          <mat-form-field appearance="fill">

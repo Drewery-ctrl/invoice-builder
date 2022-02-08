@@ -3,7 +3,7 @@ import {ClientService} from '../../services/client.service';
 import {MatTableDataSource} from "@angular/material/table";
 import {Client} from '../../models/client';
 import {MatDialog} from '@angular/material/dialog';
-import {ClientFormDialog} from '../client-form-dialog.component';
+import {FormDialogComponent} from '../form-dialog/form-dialog.component';
 
 @Component({
    selector: 'app-client-listing',
@@ -40,8 +40,9 @@ export class ClientListingComponent implements OnInit {
    }
 
    openDialog(): void {
-      const dialogRef = this.dialog.open(ClientFormDialog, {
-         width: '250px',
+      const dialogRef = this.dialog.open(FormDialogComponent, {
+         width: '500px',
+         height: '350px',
          data: {name: this.name, animal: this.animal},
       });
 
