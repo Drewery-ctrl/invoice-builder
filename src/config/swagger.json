@@ -35,7 +35,7 @@
             "produces": [ "application/json" ],
             "parameters": [
                {
-                  "name": "body",
+                  "name": "user",
                   "in": "body",
                   "description": "User object that needs to be added to the store",
                   "required": true,
@@ -48,7 +48,39 @@
                "200": {
                   "description": "User signup successful",
                   "schema": {
+                     "$ref": "#/definitions/UserSignupResponse"
+                  }
+               },
+               "400": {
+                  "description": "Invalid user supplied"
+               }
+            }
+         }
+      },
+      "/users/login": {
+         "post": {
+            "tags": [ "Users" ],
+            "summary": "Login a user",
+            "description": "Login a user",
+            "operationId": "login",
+            "consumes": [ "application/json" ],
+            "produces": [ "application/json" ],
+            "parameters": [
+               {
+                  "name": "user",
+                  "in": "body",
+                  "description": "User object that needs to be added to the store",
+                  "required": true,
+                  "schema": {
                      "$ref": "#/definitions/User"
+                  }
+               }
+            ],
+            "responses": {
+               "200": {
+                  "description": "User login successful",
+                  "schema": {
+                     "$ref": "#/definitions/UserLoginResponse"
                   }
                },
                "400": {
@@ -379,6 +411,24 @@
       }
    },
    "definitions": {
+      "UserLoginResponse": {
+         "type": "object",
+         "properties": {
+            "token": {
+               "type": "string"
+            }
+         }
+      },
+      "UserSignupResponse": {
+         "properties": {
+            "success": {
+               "type": "boolean"
+            },
+            "message": {
+               "type": "string"
+            }
+         }
+      },
       "User": {
          "required": [ "name", "email" ],
          "properties": {
