@@ -72,3 +72,13 @@ export const login = async ( req, res ) => {
       });
    }
 };
+
+export const test = async ( req, res ) => {
+   try {
+      return res.status(httpStatus.OK).json({ success: true, message: 'Test Successful', user: req.user });
+   }
+   catch (error) {
+      console.log(error);
+      return res.status(httpStatus.INTERNAL_SERVER_ERROR).json({ error: error.message });
+   }
+};
