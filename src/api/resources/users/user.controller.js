@@ -20,7 +20,9 @@ export const signUp = async ( req, res ) => {
          });
       }
       await UserModel.create(value);
-      return res.status(httpStatus.CREATED).json({ success: true, message: 'User created successfully' });
+      setTimeout(() => {
+         return res.status(httpStatus.CREATED).json({ success: true, message: 'User created successfully' });
+      }, 500);
    }
    catch (error) {
       console.log(error);
@@ -63,7 +65,9 @@ export const login = async ( req, res ) => {
       }
 
       const token = await UserService.generateToken(user);
-      return res.status(httpStatus.OK).json({ success: true, token });
+      setTimeout(() => {
+         return res.status(httpStatus.OK).json({ success: true, token });
+      }, 500);
    }
    catch (error) {
       console.log(error);
