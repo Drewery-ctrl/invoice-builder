@@ -19,4 +19,8 @@ export class JwtService {
    destroyToken(): void {
       window.localStorage.removeItem('jwt_token');
    }
+
+   isLoggedIn() {
+      return !!this.getToken();
+   }
 }
