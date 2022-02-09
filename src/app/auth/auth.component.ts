@@ -11,6 +11,7 @@ import {MatSnackBar} from "@angular/material/snack-bar";
    styleUrls: ['./auth.component.scss']
 })
 export class AuthComponent implements OnInit {
+   isLoading = false;
    title = '';
    authForm: FormGroup;
 
@@ -37,6 +38,7 @@ export class AuthComponent implements OnInit {
 
    onSubmit() {
       if (this.title === 'Login') {
+         this.isLoading = true;
          this.authService.login(this.authForm.value).subscribe({
             next: async (data) => {
                console.log('Logged in', data);
@@ -46,9 +48,13 @@ export class AuthComponent implements OnInit {
             },
             error: (err) => {
                this.errorHandler(err, 'Login Failed');
+            },
+            complete: () => {
+               this.isLoading = false;
             }
          })
       } else {
+         this.isLoading = true;
          this.authService.signup(this.authForm.value).subscribe({
             next: async (data) => {
                // this.jwtService.setToken(data);
@@ -58,12 +64,16 @@ export class AuthComponent implements OnInit {
             },
             error: (err) => {
                this.errorHandler(err, 'Signup Failed');
+            },
+            complete: () => {
+               this.isLoading = false;
             }
          })
       }
    }
 
    private errorHandler(error: any, displayMessage: string) {
+      this.isLoading = false;
       console.log(error);
       this._snackBar.open(displayMessage, 'Error', {duration: 2000});
    }
