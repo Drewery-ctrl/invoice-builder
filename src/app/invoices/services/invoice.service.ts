@@ -13,7 +13,7 @@ export class InvoiceService {
    constructor(private httpClient: HttpClient) {
    }
 
-   getInvoiceById(id: string): Observable<Invoice> {
+   getInvoiceById(id: string | null): Observable<Invoice> {
       return this.httpClient.get<Invoice>(`${BASE_URL}/invoices/${id}`);
    }
 

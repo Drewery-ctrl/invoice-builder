@@ -24,12 +24,12 @@ export class InvoiceFormComponent implements OnInit {
       private invoiceService: InvoiceService,
       private _snackBar: MatSnackBar,
       private router: Router,
-      private route: ActivatedRoute,
+      private activatedRoute: ActivatedRoute,
       private clientService: ClientService) {
    }
 
    ngOnInit() {
-      this.routeId = this.route.snapshot.paramMap.get('id');
+      this.routeId = this.activatedRoute.snapshot.paramMap.get('id');
       this.isEditMode = !!this.routeId;
       this.createForm();
       this.displayInvoiceOnForm();
@@ -37,14 +37,10 @@ export class InvoiceFormComponent implements OnInit {
    }
 
    private displayInvoiceOnForm() {
-      if (this.routeId) {
-         this.invoiceService.getInvoiceById(this.routeId).subscribe(invoice => {
-            this.invoice = invoice;
-            this.invoiceForm.patchValue(invoice);
-         }, error => {
-            this.errorHandler(error, 'Failed to get invoice');
-         });
-      }
+      this.activatedRoute.data.subscribe(data => {
+         this.invoice = data['invoice'];
+         this.invoiceForm.patchValue(data['invoice']);
+      });
    }
 
    private createForm() {
