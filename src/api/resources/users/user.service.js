@@ -4,7 +4,7 @@ import jwt from "jsonwebtoken";
 
 export const validateSchema = ( body ) => {
    const clientSchema = Joi.object().keys({
-      email: Joi.string().email().regex(/example\.com$/).required(),
+      email: Joi.string().email({ minDomainSegments: 2, tlds: { allow: ['com', 'net'] } }).required(),
       password: Joi.string().regex(/^[a-zA-Z0-9]{3,30}$/).required()
    });
    const { error, value } = clientSchema.validate(body, { abortEarly: false });
