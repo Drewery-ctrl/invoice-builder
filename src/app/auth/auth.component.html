@@ -2,9 +2,8 @@
    <div class="container-login">
       <mat-card mat-elevation-z8>
          <mat-card-title>
-            <h2>Login</h2>
+            <h2>{{ title }}</h2>
          </mat-card-title>
-         <mat-divider inset></mat-divider>
          <mat-card-content>
             <form [formGroup]="authForm" (ngSubmit)="onSubmit()" novalidate>
                <mat-form-field color="accent">
@@ -19,9 +18,18 @@
                      Password is <strong>required</strong>
                   </mat-error>
                </mat-form-field>
-               <button class="authButton" mat-raised-button color="accent" type="submit" [disabled]="!authForm.valid">Login</button>
+               <button class="authButton" mat-raised-button color="accent" type="submit" [disabled]="!authForm.valid">{{ title }}</button>
             </form>
          </mat-card-content>
+         <div class="alternative" *ngIf="title === 'Login'">
+            <p>Don't have an account? </p>
+            <button class="authButton" mat-raised-button color="accent" [routerLink]="['/signup']">Signup</button>
+         </div>
+
+         <div class="alternative" *ngIf="title === 'Signup'">
+            <p>Already have an account? </p>
+            <button class="authButton" mat-raised-button color="accent" [routerLink]="['/login']">Login</button>
+         </div>
       </mat-card>
    </div>
 </div>
