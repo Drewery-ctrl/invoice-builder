@@ -4,3 +4,9 @@ export class User {
    password: string;
    token?: string;
 }
+
+
+export interface LoginResponse {
+   success: boolean;
+   token: string;
+}

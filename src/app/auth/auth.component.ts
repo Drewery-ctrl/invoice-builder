@@ -1,6 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
+import {Router} from '@angular/router';
 import {AuthService} from "../core/services/auth.service";
+import {JwtService} from '../core/services/jwt.service';
 
 @Component({
    selector: 'app-auth',
@@ -10,7 +12,12 @@ import {AuthService} from "../core/services/auth.service";
 export class AuthComponent implements OnInit {
    authForm: FormGroup;
 
-   constructor(private fb: FormBuilder, private authService: AuthService) {
+   constructor(
+      private fb: FormBuilder,
+      private authService: AuthService,
+      private jwtService: JwtService,
+      private router: Router
+   ) {
    }
 
    ngOnInit(): void {
@@ -26,8 +33,10 @@ export class AuthComponent implements OnInit {
 
    onSubmit() {
       this.authService.login(this.authForm.value).subscribe({
-         next: (data) => {
+         next: async (data) => {
             console.log('Logged in', data);
+            this.jwtService.setToken(data.token);
+            await this.router.navigate(['/dashboard', 'invoices']);
          },
          error: (err) => {
             console.log(err);
