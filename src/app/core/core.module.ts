@@ -3,6 +3,7 @@ import {CommonModule} from '@angular/common';
 import {HttpClientModule} from '@angular/common/http';
 import {AuthService} from './services/auth.service';
 import {JwtService} from "./services/jwt.service";
+import {HttpInterceptorService} from "./services/http-interceptor.service";
 
 
 @NgModule({
@@ -11,7 +12,7 @@ import {JwtService} from "./services/jwt.service";
       CommonModule,
       HttpClientModule,
    ],
-   providers: [AuthService, JwtService]
+   providers: [AuthService, JwtService, HttpInterceptorService]
 })
 export class CoreModule {
 }
