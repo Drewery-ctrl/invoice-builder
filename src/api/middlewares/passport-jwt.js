@@ -1,12 +1,14 @@
-require('dotenv').config();
+import { devConfig } from "../../config/env/development";
 import passport from 'passport';
 import { ExtractJwt, Strategy } from 'passport-jwt';
 import UserModel from '../resources/users/user.model';
 
+require('dotenv').config();
+
 export const configurePassportJwtStrategy = () => {
    const opts = {}
    opts.jwtFromRequest = ExtractJwt.fromAuthHeaderAsBearerToken();
-   opts.secretOrKey = `${ process.env.JWT_SECRET }`;
+   opts.secretOrKey = devConfig.jwt.secret;
    passport.use(new Strategy(opts, ( jwt_payload, done ) => {
       UserModel.findOne({ _id: jwt_payload.id }, ( err, user ) => {
          if (err) {

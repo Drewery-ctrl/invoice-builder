@@ -47,3 +47,7 @@ Thumbs.db
 .env.local
 .env.development
 .env.test
+./env
+/env
+src/config/env/development.js
+src/config/env/test.js

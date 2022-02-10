@@ -9,9 +9,7 @@ export const signUp = async ( req, res ) => {
       const { email } = req.body;
       const { error, value } = UserService.validateSchema(req.body);
       if (error && error.details) {
-         return res.status(httpStatus.BAD_REQUEST).json({
-            error: error.details[0].message
-         });
+         return res.status(httpStatus.BAD_REQUEST).json({ error: error.details[0].message });
       }
       const user = await UserModel.findOne({ email });
       if (user) {

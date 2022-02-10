@@ -1,6 +1,8 @@
-require('dotenv').config();
+import { devConfig } from "../../../config/env/development";
 import Joi from "joi";
 import jwt from "jsonwebtoken";
+
+require('dotenv').config();
 
 export const validateSchema = ( body ) => {
    const clientSchema = Joi.object().keys({
@@ -15,5 +17,5 @@ export const validateSchema = ( body ) => {
 }
 
 export const generateToken = ( user ) => {
-   return jwt.sign({ id: user._id }, `${process.env.JWT_SECRET}`, { expiresIn: '1h' });
+   return jwt.sign({ id: user._id }, devConfig.jwt.secret, { expiresIn: '1d' });
 }
