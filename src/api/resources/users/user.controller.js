@@ -10,7 +10,7 @@ export const signUp = async ( req, res ) => {
       if (error && error.details) {
          return res.status(httpStatus.BAD_REQUEST).json({ error: error.details[0].message });
       }
-      const existingUser = await UserModel.findOne({ 'local.email': value.email });
+      const existingUser = await UserModel.findOne({ 'local': value }, { 'email': value.email });
       if (existingUser) {
          return res.status(httpStatus.BAD_REQUEST).json({ error: 'User with this email already exists' });
       }
@@ -51,12 +51,12 @@ export const login = async ( req, res ) => {
             error: error.details[0].message
          });
       }
-      const user = await UserModel.findOne({ email: value.email });
+      const user = await UserModel.findOne({ 'local.email': value.email });
       if (!user) {
          console.log('User not found');
          return res.status(httpStatus.BAD_REQUEST).json({ error: 'Invalid username or password' });
       }
-      const isValidPassword = await bcryptjs.compare(value.password, user.password);
+      const isValidPassword = await bcryptjs.compare(value.password, user.local.password);
       if (!isValidPassword) {
          console.log('Invalid password');
          return res.status(httpStatus.UNAUTHORIZED).json({ error: 'Invalid username or password' });
