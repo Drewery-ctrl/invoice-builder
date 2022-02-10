@@ -23,10 +23,9 @@ export const configureGoogleStrategy = () => {
                console.log('profile: ', profile);
 
                // find the user by google id
-               const user = await User.findOne({ 'googleId': profile.id });
+               const user = await User.findOne({ 'google.id': profile.id });
                if (user) {
-                  // if user exit
-                  // return this user
+                  // if user exit then return user
                   return done(null, user);
                }
 

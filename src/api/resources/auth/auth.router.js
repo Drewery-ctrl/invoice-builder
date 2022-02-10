@@ -13,7 +13,7 @@ authRouter.get('/failed', ( req, res ) => {
 });
 
 authRouter.get('/success', ( req, res ) => {
-   res.send(`Successfully authenticated ${ req.currentUser.email }`);
+   res.send(`Successfully authenticated ${ req.currentUser }`);
 });
 
 authRouter.get('/google', passport.authenticate('google', { scope: ['profile', 'email'] }));

@@ -33,6 +33,34 @@
    },
 
    "paths": {
+      "/users": {
+         "get": {
+            "tags": [ "Users" ],
+            "summary": "Get all users",
+            "description": "Returns all users",
+            "operationId": "getUsers",
+            "produces": [ "application/json" ],
+            "responses": {
+               "200": {
+                  "description": "An array of users",
+                  "schema": {
+                     "type": "array",
+                     "items": { "$ref": "#/definitions/User" }
+                  }
+               }
+            },
+            "security": [ { "Bearer": [ ] } ],
+            "parameters": [ ],
+            "deprecated": false,
+            "x-auth-type": "jwt",
+            "x-throttling-tier": "Unlimited",
+            "x-scope": "read:users",
+            "x-rate-limit": {
+               "limit": 1000,
+               "duration": "1 hour"
+            }
+         }
+      },
       "/users/signup": {
          "post": {
             "tags": [ "Users" ],

@@ -6,18 +6,18 @@ import * as UserService from './user.service';
 export const signUp = async ( req, res ) => {
    try {
       // Validate Incoming User Request
-      const { email } = req.body;
       const { error, value } = UserService.validateSchema(req.body);
       if (error && error.details) {
          return res.status(httpStatus.BAD_REQUEST).json({ error: error.details[0].message });
       }
-      const user = await UserModel.findOne({ email });
-      if (user) {
-         return res.status(httpStatus.BAD_REQUEST).json({
-            error: 'User already exists',
-         });
+      const existingUser = await UserModel.findOne({ 'local.email': value.email });
+      if (existingUser) {
+         return res.status(httpStatus.BAD_REQUEST).json({ error: 'User with this email already exists' });
       }
-      await UserModel.create(value);
+      const newUser = await new UserModel();
+      newUser.local.email = value.email;
+      newUser.local.password = await bcryptjs.hashSync(value.password, 10);
+      await newUser.save();
       setTimeout(() => {
          return res.status(httpStatus.CREATED).json({ success: true, message: 'User created successfully' });
       }, 500);
