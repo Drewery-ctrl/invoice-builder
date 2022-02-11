@@ -41,9 +41,10 @@
          <tr>
             <td class="column-title">Phone</td>
             <td>{{invoice.client.phone | slice:0:3}}-{{invoice.client.phone | slice:3:5}}-{{invoice.client.phone | slice:5:-1}}</td>
+         </tr>
          <tr>
             <td class="column-title">Total</td>
-            <td>{{ 100 | currency }}</td>
+            <td>{{ total | currency }}</td>
          </tr>
 
       </table>
