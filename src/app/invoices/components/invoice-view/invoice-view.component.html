@@ -1,1 +1,56 @@
-<p>invoice-view works!</p>
+<mat-card>
+   <mat-card-title>
+      Invoice {{ invoice.item }}
+   </mat-card-title>
+
+   <mat-card-content>
+      <table>
+         <tr>
+            <td>Name</td>
+            <td>{{ invoice.item }}</td>
+         </tr>
+         <tr>
+            <td>Amount</td>
+            <td>{{ invoice.amount }}</td>
+         </tr>
+         <tr>
+            <td>Quantity</td>
+            <td>{{ invoice.quantity }}</td>
+         </tr>
+         <tr>
+            <td>Tax</td>
+            <td>{{ invoice.tax }}</td>
+         </tr>
+         <tr>
+            <td>Date</td>
+            <td>{{ invoice.date | date:'mediumDate'}}</td>
+         </tr>
+         <tr>
+            <td>Due date</td>
+            <td>{{ invoice.dueDate | date: 'mediumDate' }}</td>
+         </tr>
+         <mat-divider></mat-divider>
+         <tr>
+            <td>Client</td>
+            <td>{{ invoice.client.firstName }} {{ invoice.client.lastName }}</td>
+         </tr>
+         <tr>
+            <td>Email</td>
+            <td>{{ invoice.client.email }}</td>
+         </tr>
+         <tr>
+            <td>Phone</td>
+            <td>{{ invoice.client.phone }}</td>
+         <tr>
+            <td>Total</td>
+            <td>{{ 100 | currency }}</td>
+         </tr>
+
+      </table>
+   </mat-card-content>
+
+   <mat-card-actions>
+      <button mat-raised-button color="primary" (click)="onEdit()">Edit</button>
+      <button mat-raised-button color="accent" (click)="onDelete()">Download</button>
+   </mat-card-actions>
+</mat-card>

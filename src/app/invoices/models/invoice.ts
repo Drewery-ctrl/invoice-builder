@@ -1,6 +1,7 @@
 export class Invoice {
    _id: string;
    item: string;
+   client: any;
    amount: number;
    tax: number;
    quantity: number;

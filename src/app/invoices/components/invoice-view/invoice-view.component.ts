@@ -20,4 +20,11 @@ export class InvoiceViewComponent implements OnInit {
       })
    }
 
+   onEdit() {
+      console.log('Edit');
+   }
+
+   onDelete() {
+      console.log('Delete');
+   }
 }
