@@ -7,7 +7,8 @@ import {HttpClientModule} from "@angular/common/http";
 import {InvoiceService} from './services/invoice.service';
 import {InvoiceFormComponent} from './components/invoice-form/invoice-form.component';
 import {EditInvoiceResolverService} from "./services/edit-invoice-resolver.service";
-import { InvoiceViewComponent } from './components/invoice-view/invoice-view.component';
+import {InvoiceViewComponent} from './components/invoice-view/invoice-view.component';
+import {RouterModule} from "@angular/router";
 
 
 @NgModule({
@@ -18,6 +19,7 @@ import { InvoiceViewComponent } from './components/invoice-view/invoice-view.com
       HttpClientModule,
       MaterialModule,
       ReactiveFormsModule,
+      RouterModule,
    ],
    exports: [InvoiceListingComponent, InvoiceFormComponent],
    providers: [InvoiceService, EditInvoiceResolverService],
