@@ -23,4 +23,8 @@ export class JwtService {
    isLoggedIn() {
       return !!this.getToken();
    }
+
+   getAuthenticatedUser() {
+      return JSON.parse(window.atob(this.getToken().split('.')[1]));
+   }
 }

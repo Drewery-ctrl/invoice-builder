@@ -1,6 +1,7 @@
-import {HttpEvent, HttpHandler, HttpInterceptor, HttpRequest} from '@angular/common/http';
+import {HttpErrorResponse, HttpEvent, HttpHandler, HttpInterceptor, HttpRequest} from '@angular/common/http';
 import {Injectable} from '@angular/core';
-import {Observable} from 'rxjs';
+import {Router} from '@angular/router';
+import {catchError, Observable, throwError} from 'rxjs';
 import {JwtService} from './jwt.service';
 
 @Injectable({
@@ -8,7 +9,7 @@ import {JwtService} from './jwt.service';
 })
 export class HttpInterceptorService implements HttpInterceptor {
 
-   constructor(private jwtService: JwtService) {
+   constructor(private jwtService: JwtService, private router: Router) {
    }
 
    intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
@@ -17,11 +18,23 @@ export class HttpInterceptorService implements HttpInterceptor {
          'Accept': 'application/json',
          'Authorization': ''
       };
-      const token = this.jwtService.getToken()
+
+      const token = this.jwtService.getToken();
+
       if (token) {
          headersConfig['Authorization'] = `Bearer ${token}`;
       }
-      const _req = req.clone({setHeaders: headersConfig});
-      return next.handle(_req);
+
+      const _req = req.clone({setHeaders: headersConfig})
+      return next.handle(_req).pipe(
+         catchError((error: HttpErrorResponse) => {
+            if (error.status === 401) {
+               this.jwtService.destroyToken();
+               this.router.navigate(['/login']);
+            }
+            return throwError(error);
+         })
+      );
    }
+
 }
