@@ -17,7 +17,7 @@ const routes: Routes = [
          {path: 'invoices', component: InvoiceListingComponent, canActivateChild: [AuthGuardService]},
          {path: 'invoices/new', component: InvoiceFormComponent, canActivateChild: [AuthGuardService]},
          {path: 'invoices/:id', component: InvoiceFormComponent, canActivateChild: [AuthGuardService], resolve: {invoice: EditInvoiceResolverService}},
-         {path: 'invoices/:id/view', component: InvoiceViewComponent, canActivateChild: [AuthGuardService]},
+         {path: 'invoices/:id/view', component: InvoiceViewComponent, canActivateChild: [AuthGuardService], resolve: {invoice: EditInvoiceResolverService}},
          {path: 'clients', component: ClientListingComponent, canActivateChild: [AuthGuardService]},
          {path: '**', redirectTo: 'invoices'}
       ]
