@@ -16,6 +16,12 @@ const UserSchema = new Schema({
       email: String,
       displayName: String,
    },
+   twitter: {
+      id: String,
+      token: String,
+      displayName: String,
+      username: String,
+   },
 }, { timestamps: true });
 
 // UserSchema.pre('save', async function ( next ) {

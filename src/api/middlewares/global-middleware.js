@@ -8,6 +8,7 @@ import swaggerDocument from "../../config/swagger.json";
 import { devConfig } from "../../config/env/development";
 import { configurePassportJwtStrategy } from "./passport-jwt";
 import { configureGoogleStrategy } from "./google-passport";
+import { configureTwitterStrategy } from "./twitter-passport";
 
 export const registerGlobalMiddlewares = ( app ) => {
    app.use(express.json());
@@ -26,5 +27,6 @@ export const registerGlobalMiddlewares = ( app ) => {
    app.use(passport.session());
    configurePassportJwtStrategy();
    configureGoogleStrategy();
+   configureTwitterStrategy();
    app.use('/api-docs', swaggerUI.serve, swaggerUI.setup(swaggerDocument, { explorer: true }));
 };

@@ -10,6 +10,7 @@ authRouter.route('/').get(( req, res ) => {
 
 
 authRouter.get('/failed', ( req, res ) => {
+   console.log('failed');
    res.redirect('http://localhost:4200/login');
 });
 
@@ -18,6 +19,19 @@ authRouter.get('/success', ( req, res ) => {
    res.send(`Successfully authenticated ${ req.currentUser }`);
 });
 
+//  Google Routes
 authRouter.get('/google', passport.authenticate('google', { scope: ['profile', 'email'] }));
-authRouter.get('/google/callback', passport.authenticate('google', { failureRedirect: '/failed' }),
-   authController.sendJWTToken);
+
+authRouter.get('/google/callback',
+   passport.authenticate('google', { failureRedirect: '/failed' }),
+   authController.sendJWTToken
+);
+
+
+// Twitter Routes
+authRouter.get('/twitter', passport.authenticate('twitter'));
+
+authRouter.get('/twitter/callback',
+   passport.authenticate('twitter', { failureRedirect: '/failed', failureMessage: true }),
+   authController.sendJWTToken
+);
