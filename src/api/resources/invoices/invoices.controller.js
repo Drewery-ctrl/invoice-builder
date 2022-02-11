@@ -55,7 +55,7 @@ export const createInvoice = async ( req, res ) => {
 
 export const findInvoiceById = async ( req, res ) => {
    try {
-      const invoice = await Invoice.findById(req.params.id);
+      const invoice = await Invoice.findById(req.params.id).populate('client');
       if (!invoice) {
          return res.status(HttpStatus.NOT_FOUND).json({ message: 'Invoice not found' });
       }
