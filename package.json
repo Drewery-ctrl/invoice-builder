@@ -19,7 +19,9 @@
     "cors": "^2.8.5",
     "dotenv": "^16.0.0",
     "express": "^4.17.2",
+    "express-pdf": "^1.2.2",
     "express-session": "^1.17.2",
+    "html-pdf": "^3.0.1",
     "http-status-codes": "^2.2.0",
     "joi": "^17.6.0",
     "jsonwebtoken": "^8.5.1",
@@ -32,6 +34,7 @@
     "passport-jwt": "^4.0.0",
     "passport-local": "^1.0.0",
     "passport-twitter": "^1.0.4",
+    "phantomjs-prebuilt-that-works": "^3.0.1",
     "swagger-ui-express": "^4.3.0"
   },
   "devDependencies": {
