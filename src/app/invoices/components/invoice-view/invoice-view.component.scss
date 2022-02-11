@@ -1,0 +1,32 @@
+.invoice-view {
+   width: 600px;
+}
+
+table {
+   width: 100%;
+   border-spacing: .9rem;
+   margin-bottom: .5rem;
+}
+
+
+.column-title {
+   font-weight: bold;
+}
+
+
+.invoice-view-btn {
+   margin-top: 1rem;
+   display: inline-block;
+   width: 100%;
+}
+
+.mat-card-actions {
+   display: flex;
+   justify-content: space-between;
+   margin: 0 auto;
+
+   & > * {
+      width: 50%;
+   }
+}
+

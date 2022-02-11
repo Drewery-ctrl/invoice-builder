@@ -1,4 +1,4 @@
-<mat-card>
+<mat-card class="invoice-view">
    <mat-card-title>
       Invoice {{ invoice.item }}
    </mat-card-title>
@@ -6,50 +6,50 @@
    <mat-card-content>
       <table>
          <tr>
-            <td>Name</td>
+            <td class="column-title">Name</td>
             <td>{{ invoice.item }}</td>
          </tr>
          <tr>
-            <td>Amount</td>
-            <td>{{ invoice.amount }}</td>
+            <td class="column-title">Amount</td>
+            <td>{{ invoice.amount | currency }}</td>
          </tr>
          <tr>
-            <td>Quantity</td>
+            <td class="column-title">Quantity</td>
             <td>{{ invoice.quantity }}</td>
          </tr>
          <tr>
-            <td>Tax</td>
-            <td>{{ invoice.tax }}</td>
+            <td class="column-title">Tax</td>
+            <td>{{ invoice.tax | currency}}</td>
          </tr>
          <tr>
-            <td>Date</td>
+            <td class="column-title">Date</td>
             <td>{{ invoice.date | date:'mediumDate'}}</td>
          </tr>
          <tr>
-            <td>Due date</td>
+            <td class="column-title">Due date</td>
             <td>{{ invoice.dueDate | date: 'mediumDate' }}</td>
          </tr>
-         <mat-divider></mat-divider>
+         <mat-divider class="divider"></mat-divider>
          <tr>
-            <td>Client</td>
+            <td class="column-title">Client</td>
             <td>{{ invoice.client.firstName }} {{ invoice.client.lastName }}</td>
          </tr>
          <tr>
-            <td>Email</td>
+            <td class="column-title">Email</td>
             <td>{{ invoice.client.email }}</td>
          </tr>
          <tr>
-            <td>Phone</td>
-            <td>{{ invoice.client.phone }}</td>
+            <td class="column-title">Phone</td>
+            <td>{{invoice.client.phone | slice:0:3}}-{{invoice.client.phone | slice:3:5}}-{{invoice.client.phone | slice:5:-1}}</td>
          <tr>
-            <td>Total</td>
+            <td class="column-title">Total</td>
             <td>{{ 100 | currency }}</td>
          </tr>
 
       </table>
    </mat-card-content>
 
-   <mat-card-actions>
+   <mat-card-actions class="invoice-view-btn">
       <button mat-raised-button color="primary" (click)="onEdit()">Edit</button>
       <button mat-raised-button color="accent" (click)="onDelete()">Download</button>
    </mat-card-actions>
