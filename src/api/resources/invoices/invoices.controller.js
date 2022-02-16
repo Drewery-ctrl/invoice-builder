@@ -1,6 +1,7 @@
 import Joi from 'joi';
 import HttpStatus from 'http-status-codes';
 import * as invoiceService from './invoice.service';
+import * as userService from '../users/user.service';
 import Invoice from './invoice.model';
 
 export const findAllInvoices = async ( req, res ) => {
@@ -131,7 +132,8 @@ export const download = async ( req, res ) => {
          return res.status(HttpStatus.NOT_FOUND).send({ err: 'could not find any invoice' });
       }
       const { subTotal, total } = invoiceService.getTotal(invoice);
-      const templateBody = await invoiceService.getTemplateBody(invoice, subTotal, total);
+      const user = await userService.getUser(req.currentUser);
+      const templateBody = await invoiceService.getTemplateBody(invoice, subTotal, total, user);
       const html = await invoiceService.getInvoiceTemplate(templateBody);
       const options = {
          format: 'A4',

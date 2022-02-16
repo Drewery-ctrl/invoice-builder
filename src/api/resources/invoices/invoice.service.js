@@ -56,7 +56,7 @@ export const getInvoiceTemplate = async ( templateBody, subTotal, total ) => {
    `;
 }
 
-export const getTemplateBody = async ( invoice, subTotal, total ) => {
+export const getTemplateBody = async ( invoice, subTotal, total, user ) => {
    return `
       <div class="container-fluid">
           <div class="row pb-4" style="padding-bottom: 20px;">
@@ -72,11 +72,11 @@ export const getTemplateBody = async ( invoice, subTotal, total ) => {
               <div class="col-xs-6">
                   <div class="panel panel-default">
                       <div class="panel-heading">
-                          <h4>From: Dental Health</h4>
+                          <h4>From: ${ user.name }</h4>
                       </div>
                       <div class="panel-body">
                           <p>
-                             <strong>Delta Dental</strong></strong>
+                             <strong>${ user.email }</strong>
                           </p>
                       </div>
                   </div>
