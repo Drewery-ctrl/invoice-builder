@@ -2,6 +2,7 @@ import express from "express";
 import cors from "cors";
 import logger from "morgan";
 import passport from "passport";
+import pdf from "express-pdf";
 import session from "express-session";
 import swaggerUI from "swagger-ui-express";
 import swaggerDocument from "../../config/swagger.json";
@@ -14,6 +15,7 @@ export const registerGlobalMiddlewares = ( app ) => {
    app.use(express.json());
    app.use(express.urlencoded({ extended: true }));
    app.use(cors());
+   app.use(pdf);
    app.use(session({
       secret: devConfig.jwt.secret,
       resave: true,

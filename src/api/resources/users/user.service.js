@@ -19,3 +19,24 @@ export const validateSchema = ( body ) => {
 export const generateToken = ( user ) => {
    return jwt.sign({ id: user._id }, devConfig.jwt.secret, { expiresIn: '1d' });
 }
+
+export const getUser = ( user ) => {
+   const rsp = {};
+   if (user.local.email) {
+      rsp.name = user.local.name;
+      rsp.email = user.local.email;
+   }
+   if (user.google.email) {
+      rsp.name = user.google.displayName;
+      rsp.email = user.google.email;
+   }
+   if (user.github.email) {
+      rsp.name = user.github.displayName;
+      rsp.email = user.github.email;
+   }
+   if (user.twitter.email) {
+      rsp.name = user.twitter.displayName;
+      rsp.email = user.twitter.email;
+   }
+   return rsp;
+}

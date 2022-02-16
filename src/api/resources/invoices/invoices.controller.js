@@ -1,5 +1,6 @@
 import Joi from 'joi';
 import HttpStatus from 'http-status-codes';
+import * as invoiceService from './invoice.service';
 import Invoice from './invoice.model';
 
 export const findAllInvoices = async ( req, res ) => {
@@ -102,6 +103,51 @@ export const deleteInvoice = async ( req, res ) => {
          return res.status(HttpStatus.NOT_FOUND).json({ message: 'Delete error: Invoice not found' });
       }
       res.status(HttpStatus.OK).json(invoice);
+   }
+   catch (error) {
+      res.status(HttpStatus.INTERNAL_SERVER_ERROR).json({ message: error.message });
+   }
+};
+
+export const downloadInvoice = async ( req, res ) => {
+   try {
+      const stream = res.writeHead(HttpStatus.OK, {
+         'Content-Type': 'application/pdf',
+         'Content-Disposition': 'attachment; filename=invoice.pdf',
+      });
+
+      await invoiceService.GeneratePdf(( chunk ) => stream.write(chunk), () => stream.end());
+   }
+   catch (error) {
+      res.status(HttpStatus.INTERNAL_SERVER_ERROR).json({ message: error.message });
+   }
+};
+
+export const download = async ( req, res ) => {
+   try {
+      const { id } = req.params;
+      const invoice = await Invoice.findById(id).populate('client');
+      if (!invoice) {
+         return res.status(httpStatus.NOT_FOUND).send({ err: 'could not find any invoice' });
+      }
+      const { subTotal, total } = invoiceService.getTotal(invoice);
+      const templateBody = await invoiceService.getTemplateBody(invoice, subTotal, total);
+      const html = await invoiceService.getInvoiceTemplate(templateBody);
+      const options = {
+         format: 'A4',
+         orientation: 'portrait',
+         border: {
+            top: '0.5in',
+            right: '0.5in',
+            bottom: '0.5in',
+            left: '0.5in',
+         },
+      };
+      res.pdfFromHTML({
+         filename: `${ invoice.item }.pdf`,
+         htmlContent: html,
+         options: options
+      });
    }
    catch (error) {
       res.status(HttpStatus.INTERNAL_SERVER_ERROR).json({ message: error.message });
