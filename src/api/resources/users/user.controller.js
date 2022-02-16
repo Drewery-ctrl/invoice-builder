@@ -6,7 +6,7 @@ import * as UserService from './user.service';
 export const signUp = async ( req, res ) => {
    try {
       // Validate Incoming User Request
-      const { error, value } = UserService.validateSchema(req.body);
+      const { error, value } = UserService.ValidateSignupSchema(req.body);
       if (error && error.details) {
          return res.status(httpStatus.BAD_REQUEST).json({ error: error.details[0].message });
       }
@@ -15,6 +15,7 @@ export const signUp = async ( req, res ) => {
          return res.status(httpStatus.BAD_REQUEST).json({ error: 'User with this email already exists' });
       }
       const newUser = await new UserModel();
+      newUser.local.name = value.name;
       newUser.local.email = value.email;
       newUser.local.password = await bcryptjs.hashSync(value.password, 10);
       await newUser.save();
@@ -45,7 +46,7 @@ export const getAllUsers = async ( req, res ) => {
 
 export const login = async ( req, res ) => {
    try {
-      const { error, value } = UserService.validateSchema(req.body);
+      const { error, value } = UserService.validateLoginSchema(req.body);
       if (error && error.details) {
          return res.status(httpStatus.BAD_REQUEST).json({
             error: error.details[0].message

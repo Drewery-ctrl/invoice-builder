@@ -108,7 +108,7 @@
                   "description": "User object that needs to be added to the store",
                   "required": true,
                   "schema": {
-                     "$ref": "#/definitions/User"
+                     "$ref": "#/definitions/UserLogin"
                   }
                }
             ],
@@ -537,6 +537,21 @@
             }
          }
       },
+      "UserLogin": {
+         "type": "object",
+         "properties": {
+            "email": {
+               "type": "string",
+               "format": "email",
+               "example": "Danny@example.com"
+            },
+            "password": {
+               "type": "string",
+               "format": "password",
+               "example": "password1234"
+            }
+         }
+      },
       "UserSignupResponse": {
          "properties": {
             "success": {
@@ -548,11 +563,15 @@
          }
       },
       "User": {
-         "required": [ "name", "email" ],
+         "required": [ "name", "email", "password" ],
          "properties": {
+            "name": {
+               "type": "string",
+               "example": "John Doe"
+            },
             "email": {
                "type": "string",
-               "example": "Danny@example.com",
+               "example": "Johnny@example.com",
                "format": "email"
             },
             "password": {
