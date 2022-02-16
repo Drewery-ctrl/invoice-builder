@@ -4,6 +4,7 @@ import {Router} from '@angular/router';
 import {AuthService} from "../core/services/auth.service";
 import {JwtService} from '../core/services/jwt.service';
 import {MatSnackBar} from "@angular/material/snack-bar";
+import {User} from '../core/models/user';
 
 @Component({
    selector: 'app-auth',
@@ -31,6 +32,7 @@ export class AuthComponent implements OnInit {
 
    private initForm() {
       this.authForm = this.fb.group({
+         name: '',
          email: ['', Validators.required],
          password: ['', Validators.required]
       });
@@ -39,7 +41,9 @@ export class AuthComponent implements OnInit {
    onSubmit() {
       if (this.title === 'Login') {
          this.isLoading = true;
-         this.authService.login(this.authForm.value).subscribe({
+         let {email, password} = this.authForm.value;
+         const user: User = {email, password};
+         this.authService.login(user).subscribe({
             next: async (data) => {
                console.log('Logged in', data);
                this._snackBar.open('Successfully Logged in', 'Success', {duration: 2000});
