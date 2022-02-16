@@ -10,6 +10,7 @@ import {InvoiceService} from '../../services/invoice.service';
    styleUrls: ['./invoice-view.component.scss']
 })
 export class InvoiceViewComponent implements OnInit {
+   isLoadingResults = false;
    invoice: Invoice;
    total: number;
    salesTax = 0;
@@ -40,6 +41,7 @@ export class InvoiceViewComponent implements OnInit {
    }
 
    downloadHandler(_id: string) {
+      this.isLoadingResults = true;
       this.invoiceService.downloadInvoice(_id).subscribe({
          next: (data) => {
             console.log(data);
@@ -50,6 +52,9 @@ export class InvoiceViewComponent implements OnInit {
          },
          error: (error) => {
             console.log(error);
+         },
+         complete: () => {
+            this.isLoadingResults = false;
          }
       });
    }
