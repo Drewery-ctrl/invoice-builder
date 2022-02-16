@@ -39,4 +39,8 @@ export class InvoiceService {
    updateInvoice(id: string | null, body: Invoice) {
       return this.httpClient.put<Invoice>(`${BASE_URL}/invoices/${id}`, body);
    }
+
+   downloadInvoice(id: string | null) {
+      return this.httpClient.get(`${BASE_URL}/invoices/${id}/download`, {responseType: 'blob'});
+   }
 }

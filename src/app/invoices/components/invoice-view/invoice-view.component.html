@@ -52,6 +52,6 @@
 
    <mat-card-actions class="invoice-view-btn">
       <button mat-raised-button color="primary" [routerLink]="['/dashboard', 'invoices', invoice._id]">Edit</button>
-      <button mat-raised-button color="accent" (click)="onDelete()">Download</button>
+      <button mat-raised-button color="accent" (click)="downloadHandler(invoice._id)">Download</button>
    </mat-card-actions>
 </mat-card>
