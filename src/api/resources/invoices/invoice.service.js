@@ -40,7 +40,7 @@ export const getInvoiceTemplate = async ( templateBody, subTotal, total ) => {
        <html lang="en">
        <head>
            <title>Invoice Document</title>
-           <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+             <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
            <style>
                @import url('https://fonts.googleapis.com/css?family=Bree+Serif');
 
@@ -58,8 +58,8 @@ export const getInvoiceTemplate = async ( templateBody, subTotal, total ) => {
 
 export const getTemplateBody = async ( invoice, subTotal, total ) => {
    return `
-      <div class="container">
-          <div class="row">
+      <div class="container-fluid">
+          <div class="row pb-4" style="padding-bottom: 20px;">
               <div class="col-xs-6"></div>
               <div class="col-xs-6 text-right">
                   <h1>INVOICE</h1>
@@ -69,19 +69,19 @@ export const getTemplateBody = async ( invoice, subTotal, total ) => {
               </div>
           </div>
           <div class="row">
-              <div class="col-xs-5">
+              <div class="col-xs-6">
                   <div class="panel panel-default">
                       <div class="panel-heading">
-                          <h4>From:</h4>
+                          <h4>From: Dental Health</h4>
                       </div>
                       <div class="panel-body">
                           <p>
-                             
+                             <strong>Delta Dental</strong></strong>
                           </p>
                       </div>
                   </div>
               </div>
-              <div class="col-xs-5 col-xs-offset-2 text-right">
+              <div class="col-xs-6">
                   <div class="panel panel-default">
                       <div class="panel-heading">
                           <h4>
@@ -102,7 +102,7 @@ export const getTemplateBody = async ( invoice, subTotal, total ) => {
               <thead>
                   <tr>
                       <th>
-                          <h4>Qty</h4>
+                          <h4>Quantity</h4>
                       </th>
                       <th>
                           <h4>Rate</h4>
@@ -120,27 +120,19 @@ export const getTemplateBody = async ( invoice, subTotal, total ) => {
                   </tr>
               </tbody>
           </table>
-          <div class="row text-right">
-              <div class="col-xs-2 col-xs-offset-8">
-                  <p>
-                      <strong>
-                          Sub Total :
-                          <br />
-                          TAX : <br />
-                          Total :
-                          <br />
-                      </strong>
-                  </p>
-              </div>
-              <div class="col-xs-2">
-                  <strong>
-                      $${ subTotal }
-                      <br />
-                      $${ invoice.tax } <br />
-                      $${ total }
-                      <br />
-                  </strong>
-              </div>
+          <div class="row text-right ">
+             <div style="margin-right: 15px;">
+                <p>
+                     <strong>Subtotal: </strong> $${ subTotal }
+                 </p>
+                 <p>
+                     <strong>Tax: </strong> $${ invoice.tax }
+                 </p>
+                 <p>
+                     <strong>Total: </strong> $${ total }
+                 </p>
+             </div>
+           
           </div>
       </div>
    `
