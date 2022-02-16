@@ -3,6 +3,7 @@ import {ActivatedRoute} from '@angular/router';
 import {Invoice} from '../../models/invoice';
 import {saveAs} from 'file-saver';
 import {InvoiceService} from '../../services/invoice.service';
+import {MatSnackBar} from '@angular/material/snack-bar';
 
 @Component({
    selector: 'app-invoice-view',
@@ -15,7 +16,10 @@ export class InvoiceViewComponent implements OnInit {
    total: number;
    salesTax = 0;
 
-   constructor(private activatedRoute: ActivatedRoute, private invoiceService: InvoiceService) {
+   constructor(
+      private activatedRoute: ActivatedRoute,
+      private invoiceService: InvoiceService,
+      private _snackBar: MatSnackBar) {
    }
 
    ngOnInit(): void {
@@ -51,12 +55,17 @@ export class InvoiceViewComponent implements OnInit {
             // window.open(fileURL, '_blank');
          },
          error: (error) => {
-            console.log(error);
-            this.isLoadingResults = false;
+            this.errorHandler(error, 'Error downloading invoice');
          },
          complete: () => {
             this.isLoadingResults = false;
          }
       });
+   }
+
+   private errorHandler(error: any, message?: string) {
+      console.log(error);
+      this.isLoadingResults = false;
+      this._snackBar.open(message ?? error.message, 'Error', {duration: 2000})
    }
 }
