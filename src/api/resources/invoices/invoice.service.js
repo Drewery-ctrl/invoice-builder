@@ -105,7 +105,7 @@ export const getTemplateBody = async ( invoice, subTotal, total ) => {
                           <h4>Quantity</h4>
                       </th>
                       <th>
-                          <h4>Rate</h4>
+                          <h4>Amount</h4>
                       </th>
                       <th>
                           <h4>Tax</h4>
@@ -122,14 +122,14 @@ export const getTemplateBody = async ( invoice, subTotal, total ) => {
           </table>
           <div class="row text-right ">
              <div style="margin-right: 15px;">
-                <p>
-                     <strong>Subtotal: </strong> $${ subTotal }
+                 <p>
+                     <strong style="margin-right: 5px;">Total: </strong> $${ total }
                  </p>
                  <p>
-                     <strong>Tax: </strong> $${ invoice.tax }
+                     <strong style="margin-right: 5px;">Tax: </strong> $${ invoice.tax }
                  </p>
                  <p>
-                     <strong>Total: </strong> $${ total }
+                     <strong style="margin-right: 2px;">Subtotal: </strong> $${ subTotal }
                  </p>
              </div>
            

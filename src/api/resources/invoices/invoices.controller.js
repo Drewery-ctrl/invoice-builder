@@ -128,7 +128,7 @@ export const download = async ( req, res ) => {
       const { id } = req.params;
       const invoice = await Invoice.findById(id).populate('client');
       if (!invoice) {
-         return res.status(httpStatus.NOT_FOUND).send({ err: 'could not find any invoice' });
+         return res.status(HttpStatus.NOT_FOUND).send({ err: 'could not find any invoice' });
       }
       const { subTotal, total } = invoiceService.getTotal(invoice);
       const templateBody = await invoiceService.getTemplateBody(invoice, subTotal, total);
