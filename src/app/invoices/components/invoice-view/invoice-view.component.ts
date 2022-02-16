@@ -52,6 +52,7 @@ export class InvoiceViewComponent implements OnInit {
          },
          error: (error) => {
             console.log(error);
+            this.isLoadingResults = false;
          },
          complete: () => {
             this.isLoadingResults = false;
